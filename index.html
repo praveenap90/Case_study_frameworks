@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem('cp-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
 <title>Case Interview Numbers and Frameworks</title>
 <style>
 :root{
@@ -11,26 +12,31 @@
   --okbg:#EAF3DE;--okt:#27500A;--warnbg:#FAEEDA;--warnt:#633806;--arrow:#73726c;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
-@media (prefers-color-scheme:dark){
-  :root{--bg:#1a1a19;--card:#232321;--soft:#2c2c2a;--text:#f0efec;--muted:#b4b2a9;--line:rgba(255,255,255,.16);
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1a19;--card:#232321;--soft:#2c2c2a;--text:#f0efec;--muted:#b4b2a9;--line:rgba(255,255,255,.16);
+    --acc:#AFA9EC;--accbg:#3C3489;--acct:#CECBF6;--okbg:#27500A;--okt:#C0DD97;--warnbg:#633806;--warnt:#FAC775;--arrow:#9c9a92}}
+:root[data-theme="dark"]{--bg:#1a1a19;--card:#232321;--soft:#2c2c2a;--text:#f0efec;--muted:#b4b2a9;--line:rgba(255,255,255,.16);
     --acc:#AFA9EC;--accbg:#3C3489;--acct:#CECBF6;--okbg:#27500A;--okt:#C0DD97;--warnbg:#633806;--warnt:#FAC775;--arrow:#9c9a92}
-}
+
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.65 var(--sans)}
 .wrap{max-width:760px;margin:0 auto;padding:24px 16px 64px}
-a.back{display:inline-block;font-size:14px;color:var(--acc);text-decoration:none;padding:6px 0;margin:0 0 6px}
-a.back:hover{text-decoration:underline}
 h1{font-size:24px;line-height:1.3;font-weight:500;margin:0 0 6px}
-h2{font-size:18px;font-weight:500;margin:28px 0 8px}
+h2{font-size:26px;line-height:1.25;font-weight:600;margin:36px 0 12px}
 h3{font-size:15px;font-weight:500;margin:20px 0 6px;color:var(--acct)}
 p{margin:0 0 10px}
 ul,ol{margin:0 0 10px;padding-left:22px}
 li{margin-bottom:4px}
 .lead{color:var(--muted);margin-bottom:14px}
+.intro{background:var(--accbg);color:var(--acct);border-radius:12px;padding:14px 16px;margin:0 0 16px}
+.intro h3{margin:0 0 6px;color:var(--acct);font-size:16px}
+.intro p{margin:0 0 8px}
+.intro p:last-child{margin:0}
 .how{background:var(--soft);border-radius:12px;padding:12px 16px;margin:0 0 16px}
 .how b{font-weight:500}
 .how ol{margin:6px 0 0}
+:root[data-theme="dark"]{color-scheme:dark}
+:root[data-theme="light"]{color-scheme:light}
 .bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
 button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer;min-height:40px}
 button:hover{background:var(--soft)}
@@ -102,27 +108,32 @@ figure.pic figcaption button{padding:4px 12px;min-height:36px}
 .c-blue{--f:#E6F1FB;--s:#185FA5;--t1:#0C447C;--t2:#185FA5}
 .c-amber{--f:#FAEEDA;--s:#854F0B;--t1:#633806;--t2:#854F0B}
 .c-gray{--f:#F1EFE8;--s:#5F5E5A;--t1:#444441;--t2:#5F5E5A}
-@media (prefers-color-scheme:dark){
-  .c-purple{--f:#3C3489;--s:#AFA9EC;--t1:#CECBF6;--t2:#AFA9EC}
-  .c-teal{--f:#085041;--s:#5DCAA5;--t1:#9FE1CB;--t2:#5DCAA5}
-  .c-coral{--f:#712B13;--s:#F0997B;--t1:#F5C4B3;--t2:#F0997B}
-  .c-pink{--f:#72243E;--s:#ED93B1;--t1:#F4C0D1;--t2:#ED93B1}
-  .c-blue{--f:#0C447C;--s:#85B7EB;--t1:#B5D4F4;--t2:#85B7EB}
-  .c-amber{--f:#633806;--s:#EF9F27;--t1:#FAC775;--t2:#EF9F27}
-  .c-gray{--f:#444441;--s:#B4B2A9;--t1:#D3D1C7;--t2:#B4B2A9}
-}
-@media (prefers-color-scheme:dark){.ln{stroke:#85B7EB}.dt{fill:#85B7EB}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .c-purple{--f:#3C3489;--s:#AFA9EC;--t1:#CECBF6;--t2:#AFA9EC}:root:not([data-theme="light"]) .c-teal{--f:#085041;--s:#5DCAA5;--t1:#9FE1CB;--t2:#5DCAA5}:root:not([data-theme="light"]) .c-coral{--f:#712B13;--s:#F0997B;--t1:#F5C4B3;--t2:#F0997B}:root:not([data-theme="light"]) .c-pink{--f:#72243E;--s:#ED93B1;--t1:#F4C0D1;--t2:#ED93B1}:root:not([data-theme="light"]) .c-blue{--f:#0C447C;--s:#85B7EB;--t1:#B5D4F4;--t2:#85B7EB}:root:not([data-theme="light"]) .c-amber{--f:#633806;--s:#EF9F27;--t1:#FAC775;--t2:#EF9F27}:root:not([data-theme="light"]) .c-gray{--f:#444441;--s:#B4B2A9;--t1:#D3D1C7;--t2:#B4B2A9}}
+:root[data-theme="dark"] .c-purple{--f:#3C3489;--s:#AFA9EC;--t1:#CECBF6;--t2:#AFA9EC}
+:root[data-theme="dark"] .c-teal{--f:#085041;--s:#5DCAA5;--t1:#9FE1CB;--t2:#5DCAA5}
+:root[data-theme="dark"] .c-coral{--f:#712B13;--s:#F0997B;--t1:#F5C4B3;--t2:#F0997B}
+:root[data-theme="dark"] .c-pink{--f:#72243E;--s:#ED93B1;--t1:#F4C0D1;--t2:#ED93B1}
+:root[data-theme="dark"] .c-blue{--f:#0C447C;--s:#85B7EB;--t1:#B5D4F4;--t2:#85B7EB}
+:root[data-theme="dark"] .c-amber{--f:#633806;--s:#EF9F27;--t1:#FAC775;--t2:#EF9F27}
+:root[data-theme="dark"] .c-gray{--f:#444441;--s:#B4B2A9;--t1:#D3D1C7;--t2:#B4B2A9}
+
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ln{stroke:#85B7EB}:root:not([data-theme="light"]) .dt{fill:#85B7EB}}
+:root[data-theme="dark"] .ln{stroke:#85B7EB}
+:root[data-theme="dark"] .dt{fill:#85B7EB}
+
 @media print{.bar,figure.pic figcaption button,.chips{display:none}.sec .body{display:block}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<a class="back" href="knowledge-bank.html">&larr; Back to the knowledge bank</a>
 <h1>Case interview numbers and frameworks</h1>
 <p class="lead">Short sections you can open one at a time. Each one goes concept, worked example, practice, pictures, then flash cards.</p>
+<div class="intro"><h3>What this page is about</h3>
+<p>A case interview gives you a business problem and asks you to think out loud and do quick math. Companies like Capital One use it for data analyst and data engineer roles. A framework is just a simple structure for organizing your thinking, so you do not freeze or miss something important.</p>
+<p>This page is a study kit in four parts: pick the approach, know the question types, sharpen your math, then practice and review. Every section follows the same order: the idea, a worked example, practice questions, pictures and flash cards.</p></div>
 <div class="how"><b>How to use this page</b>
 <ol><li>Open one section. Read the concept and the worked example.</li><li>Try the practice questions before you tap the answer.</li><li>Tap a flash card to flip it. Say the answer out loud first.</li></ol></div>
-<div class="bar"><button type="button" id="openAll">Open all sections</button><button type="button" id="closeAll">Close all sections</button></div>
+<div class="bar"><button type="button" id="openAll">Open all sections</button><button type="button" id="closeAll">Close all sections</button><button type="button" id="themeBtn" aria-label="Change colour theme">Theme: Auto</button></div>
 <div class="toc" id="toc"></div>
 <div id="app"></div>
 </div>
@@ -605,10 +616,10 @@ tbl(['If the case is about...','Use','Key question'],[
  ['A new market or product','3Cs','Can we do it, do customers want it, who else is there?'],
  ['A spend decision','Payback','How many years until the money comes back?']])+
 '<h3>How each tool works</h3><ul>'+
-'<li>Profit tree: profit = revenue − cost. Split revenue into price × volume and cost into fixed and variable. Find the branch that moved.</li>'+
-'<li>BCG matrix: rate each product on market growth and your share. Invest in Stars, milk Cash cows, test Question marks, fix or sell Dogs. Use it only when there are several products and limited money.</li>'+
-'<li>3Cs: company, customers, competitors. You need a yes on all three.</li>'+
-'<li>Payback: cost ÷ yearly profit. Shorter is better.</li></ul>',
+'<li>Profit tree: profit = revenue − cost. Split revenue into price × volume and cost into fixed and variable. Find the branch that moved.</li></ul>{{pic:tree}}<ul>'+
+'<li>BCG matrix: rate each product on market growth and your share. Invest in Stars, milk Cash cows, test Question marks, fix or sell Dogs. Use it only when there are several products and limited money.</li></ul>{{pic:bcg}}<ul>'+
+'<li>3Cs: company, customers, competitors. You need a yes on all three.</li></ul>{{pic:threec}}<ul>'+
+'<li>Payback: cost ÷ yearly profit. Shorter is better.</li></ul>{{pic:payback}}',
 example:'<p>Amusement park numbers, kept simple.</p><ul>'+
 '<li>Profit tree: revenue $150M, cost $100M, so profit is $50M. Revenue is $50 × 3M visitors.</li>'+
 '<li>BCG matrix: food stands earn steady cash in a slow market (Cash cow). Premium passes are new and growing but small (Question mark).</li>'+
@@ -619,7 +630,7 @@ practice:[
  ['A retailer has five product lines and limited cash. Which tool?','BCG matrix. Place each line by market growth and share, then decide where to invest.'],
  ['A food truck wants to enter a new town. Which tool?','3Cs. Can we do it, do customers want it, who else is there?'],
  ['A $6M project earns $2M a year. What is the payback?','$6M ÷ $2M = 3 years.']],
-pics:['bcg','tree','threec','payback'],cards:null});
+pics:[],cards:null});
 
 SECTIONS.push({id:'frameworks',group:'1. Pick the approach',title:'Pick the right framework',desc:'Market entry, acquisition, diagnosis, competitive threat',
 concept:'<p>Four practice questions gave four frameworks. Match the case to one, then say its boxes out loud before you calculate.</p>'+
@@ -629,20 +640,20 @@ tbl(['If the case is about...','Use','The boxes'],[
  ['Profit or sales fell (Q2)','Diagnosis','Numbers first (quantitative), then customers, competitors, market (qualitative)'],
  ['A competitor is moving in (Q3)','Competitive threat','Threat size, customer response, competitor response, our options'],
  ['No framework fits (Framework approach #2)','Memorized list of business areas','Market, Competition, Company, Customers, Profitability, Strategic alternatives, Risks & mitigations, Create your own']])+
-'<p>Framework approach #2: memorize a list of 8 to 10 broad business areas, then pick the most relevant ones for the case. The last box, Create your own, is a reminder to add an area that fits this case.</p>'+
+'{{pic:fw1}}{{pic:fw2}}{{pic:fw3}}<p>Framework approach #2: memorize a list of 8 to 10 broad business areas, then pick the most relevant ones for the case. The last box, Create your own, is a reminder to add an area that fits this case.</p>{{pic:fw5}}'+
 '<p>Questions 1 and 4 follow almost the same pattern: market, then competition, then the company, then the numbers. That is one structure for two case types.</p>',
 example:'<p>An acquisition case: a firm wants to buy a roofing tile distributor.</p><ul>'+
 '<li>Market: how big, how fast growing, what margins?</li>'+
 '<li>Competition: how many rivals, how much share, what advantages?</li>'+
 '<li>Target company: is it profitable, how much share, any differentiation?</li>'+
-'<li>Financials: is the price fair, how much can we improve it, what are the expected returns?</li></ul>'+
+'<li>Financials: is the price fair, how much can we improve it, what are the expected returns?</li></ul>{{pic:fw4}}'+
 say('I would look at four areas: how attractive the market is, who the competitors are, whether this company can win, and whether the numbers work.'),
 practice:[
  ['A snack company wants to sell in a new country. Which framework?','Market entry: market, competition, our capabilities, profitability.'],
  ['A firm wants to buy a competitor. Which framework?','Acquisition: market, competition, target company, financial considerations.'],
  ['A restaurant chain saw profit fall 15% in a year. Which framework?','Diagnosis: check revenue and costs first, then customers, competitors and the market.'],
  ['A big rival opens next door. Which framework?','Competitive threat: threat size, customer response, competitor response, our options.']],
-pics:['fw5','fw1','fw2','fw3','fw4'],
+pics:[],
 cards:{
 "Pick a framework":[
 ["A company wants to launch a new product in a new market, like organic pineapple. Which framework?","Market entry: market attractiveness, competitive landscape, our capabilities, profitability."],
@@ -681,8 +692,8 @@ concept:'<p>Profit is what is left after costs. Breakeven is when profit is exac
 '<li>Total variable costs = Quantity × variable cost per unit</li>'+
 '<li>Profit = Revenue − Costs</li></ul>'+
 '<p>Variable costs change with how much you make (ingredients). Fixed costs stay the same (rent, salaries). Combine all four:</p>'+
-'<div class="say"><b>Profit = (Price − Variable cost) × Quantity − Fixed costs</b></div>'+
-'<h3>Breakeven in 3 steps</h3><ol><li>Write the profit equation.</li><li>Set profit to $0.</li><li>Solve for Q, the quantity.</li></ol>'+
+'<div class="say"><b>Profit = (Price − Variable cost) × Quantity − Fixed costs</b></div>{{pic:pizza}}'+
+'<h3>Breakeven in 3 steps</h3><ol><li>Write the profit equation.</li><li>Set profit to $0.</li><li>Solve for Q, the quantity.</li></ol>{{pic:breakeven}}'+
 '<p>Why it works: each unit leaves some money after its own cost (price − variable cost). That money pays off the fixed costs. Breakeven is how many units it takes to pay them off completely.</p>',
 example:'<p>A pizza store sells 100,000 pizzas a year at $10 each. Each pizza costs $4 to make. Rent is $150K and 2 employees earn $75K each.</p>'+
 tbl(['Step','Math','Result'],[
@@ -701,7 +712,7 @@ practice:[
  ['Ingredients rise so each pizza costs $5. New breakeven?','Each pizza leaves $5. $300K ÷ 5 = 60,000 pizzas.'],
  ['Rent rises from $150K to $180K. New breakeven?','Fixed costs are $330K. $330K ÷ 6 = 55,000 pizzas.'],
  ['Price is $12 and the store sells 100,000. Profit?','($12 − $4) × 100,000 − $300K = $800K − $300K = $500K.']],
-pics:['pizza','breakeven'],
+pics:[],
 cards:{
 "Formulas":[
 ["What is revenue, and what is its formula?","The income a business generates from its operations. Revenue = Quantity × Price."],
@@ -733,7 +744,7 @@ cards:{
 SECTIONS.push({id:'invest',group:'2. Question types',title:'Investment: ROI and payback',desc:'Startup and roofing tile examples',
 concept:'<p>Investing means using cash today in the hope of making more later. Examples: marketing to generate sales, building a new product, infrastructure that cuts long-term costs, acquiring a company, or a private equity firm buying a company to resell.</p>'+
 '<div class="say"><b>ROI = Profit ÷ Investment cost</b><br><b>Payback period = Investment cost ÷ Profit per year</b></div>'+
-'<ul><li>ROI asks: how much do I earn for each dollar I put in?</li><li>Payback asks: how many years until I get my money back?</li></ul>'+
+'<ul><li>ROI asks: how much do I earn for each dollar I put in?</li><li>Payback asks: how many years until I get my money back?</li></ul>{{pic:roi}}'+
 '<p>Always ask: is the profit per year or a total? Payback uses profit per year. In the roofing tile example below, the profit is the total gain over the whole holding period.</p>'+
 '<p>For a steady yearly profit, yearly ROI = 1 ÷ payback. A 5-year payback is a 20% yearly return.</p>',
 example:'<h3>Payback: a machine learning startup</h3><p>A software company buys a startup for $20M. It should add $4M of profit a year.</p><ul><li>Payback = $20M ÷ $4M = 5 years</li><li>Yearly ROI = $4M ÷ $20M = 20% a year</li></ul>'+
@@ -747,7 +758,7 @@ practice:[
  ['The roofing tile firm sells for $150M. ROI?','$50M ÷ $100M = 50%.'],
  ['It sells for $90M. ROI?','Profit = −$10M, so ROI = −10%. That is a loss.'],
  ['The firm wants a 50% ROI on $100M. What sale price does it need?','Profit needed = $50M, so it must sell for $150M.']],
-pics:['roi'],
+pics:[],
 cards:{
 "Payback and ROI":[
 ["What is investing?","Using cash today in the hope of creating wealth in the future."],
@@ -788,13 +799,13 @@ cards:{"Operations":[
 
 SECTIONS.push({id:'charts',group:'2. Question types',title:'Charts and graphs',desc:'Ten chart types, read them, say what they mean',starter:false,
 concept:'<div class="note">The ten chart types come from your video. The pictures use made-up, generic numbers (products and regions), so you can swap in any case. The reading steps, practice and "Look for" tips are my own wording.</div>'+
-'<p>There are ten chart types to know. Open the pictures below, one per type. Then, when you see a chart:</p><ol><li>Read the title, axes and units.</li><li>Find the pattern.</li><li>Calculate any change. Divide a percent change by the starting number.</li><li>Say what it means for the case.</li></ol>',
+'<p>There are ten chart types to know. Each picture shows one type and what it is for.</p>{{pic:ch_bar}}{{pic:ch_stack}}{{pic:ch_pct}}{{pic:ch_pie}}{{pic:ch_line}}{{pic:ch_hist}}{{pic:ch_scat}}{{pic:ch_bub}}{{pic:ch_wf}}{{pic:ch_mek}}<h3>How to read any chart</h3><p>When you see a chart:</p><ol><li>Read the title, axes and units.</li><li>Find the pattern.</li><li>Calculate any change. Divide a percent change by the starting number.</li><li>Say what it means for the case.</li></ol>',
 example:'<p>A bar rises from 40 to 50.</p><ul><li>Change = 10. Percent change = 10 ÷ 40 = 25%.</li></ul>'+
 say('The bar rose from 40 to 50, a 25% increase, which tells me demand is growing.'),
 practice:[
  ['A chart shows a 20% share of a $200M market. Revenue?','0.2 × $200M = $40M.'],
  ['Share goes from 20% to 25%. How do you describe it?','+5 percentage points, which is a 25% increase (5 ÷ 20).']],
-pics:['ch_bar','ch_stack','ch_pct','ch_pie','ch_line','ch_hist','ch_scat','ch_bub','ch_wf','ch_mek'],
+pics:[],
 cards:{"Ten chart types":[
 ["Simple bar chart: what does it do?","Compares a single variable."],
 ["Stacked bar chart: what does it do?","Compares a single variable and shows the parts that make up each bar."],
@@ -817,18 +828,19 @@ SECTIONS.push({id:'decline',group:'2. Question types',title:'Profit decline case
 concept:'<p>A profit decline case asks: why did profit fall, and what should we do? Work in three steps and say them out loud first.</p><ol>'+
 '<li><b>WHAT</b> is causing the decline? Profit = Revenues - Costs. Find which one moved, then keep splitting it (by product, region, customer) until you find the exact spot.</li>'+
 '<li><b>WHY</b> is it happening? Check four areas: profitability, customers, competitors and the market.</li>'+
-'<li><b>Brainstorm</b> ideas and make a recommendation.</li></ol>'+
+'<li><b>Brainstorm</b> ideas and make a recommendation.</li></ol>{{pic:dc_steps}}'+
 tbl(['Area','Questions to ask'],[
  ['Profitability','How have revenues changed? How have costs changed? What is causing the decline in profits?'],
  ['Customers','Have customer needs changed? Have they changed their purchasing habits? Do they view the company differently?'],
  ['Competitors','Have new competitors entered the market? Have existing competitors made recent moves?'],
  ['Market','Are there new technologies? Are there new regulations?']])+
-'<p>If the problem is a cost, the areas change a little: suppliers, competitors and the market for that cost (here, the electric car market). Ask whether suppliers raised prices or their own costs, whether competitors also see higher costs, whether demand for the item rose elsewhere, and whether new regulations changed supply.</p>',
+'{{pic:dc_why}}'+
+'<p>If the problem is a cost, the areas change a little: suppliers, competitors and the market for that cost (here, the electric car market). Ask whether suppliers raised prices or their own costs, whether competitors also see higher costs, whether demand for the item rose elsewhere, and whether new regulations changed supply.</p>{{pic:dc_cost}}',
 example:'<p>A car maker\'s profit fell $100M. Revenues fell $80M and costs rose $20M.</p><ul>'+
 '<li>Step 1, WHAT: revenues are the main cause ($80M of the $100M).</li>'+
-'<li>Split revenues by car size: Compact up $20M, Mid-size down $10M, Full-size down $90M. That is +20 - 10 - 90 = -$80M. Full-size cars are the problem.</li>'+
+'<li>Split revenues by car size: Compact up $20M, Mid-size down $10M, Full-size down $90M. That is +20 - 10 - 90 = -$80M. Full-size cars are the problem.</li></ul>{{pic:dc_what}}<ul>'+
 '<li>Step 2, WHY: competitors decreased the price of their full-size cars.</li>'+
-'<li>Step 3, ideas: decrease prices; keep prices but add car features; increase prices and target the premium segment.</li></ul>'+
+'<li>Step 3, ideas: decrease prices; keep prices but add car features; increase prices and target the premium segment.</li></ul>{{pic:dc_ideas}}'+
 say('Profit fell $100M. Revenues drove $80M of that. Inside revenues, full-size cars fell $90M while compact grew $20M. So the problem is full-size cars. Next I want to understand why: customers, competitors and the market.')+
 '<p>Cost version of the same case: costs rose $80M. Check car batteries, alloys and fixed costs. Batteries are the answer. Why: the supplier\'s cost to produce batteries rose. Ideas: negotiate a lower price; switch to another supplier; use a different type of battery.</p>',
 practice:[
@@ -838,7 +850,7 @@ practice:[
  ['Costs rose $80M. Name three costs to check.','Cost of car batteries, cost of alloys, fixed costs (then other possibilities).'],
  ['Full-size sales fell because competitors cut their prices. Give three ideas.','Decrease prices; keep prices the same but add car features; increase prices and target the premium segment.'],
  ['What are the three steps in order?','1. Find WHAT is causing the decline. 2. Understand WHY it is happening. 3. Brainstorm ideas and recommend.']],
-pics:['dc_steps','dc_what','dc_why','dc_ideas','dc_cost'],
+pics:[],
 cards:{"Profit decline case":[
 ["What are the three steps of a profit decline case?","1. WHAT is causing the decline. 2. WHY it is happening. 3. Brainstorm ideas and recommend."],
 ["Step 1 formula?","Profit = Revenues - Costs. Find which one moved."],
@@ -860,7 +872,7 @@ cards:{"Profit decline case":[
 SECTIONS.push({id:'market',group:'2. Question types',title:'Market sizing',desc:'Top-down, bottom-up, tire example, rule of 72',
 concept:'<p>Market size is the total sales of a product or service in one year in a given region. It can also be the number of units sold in a year, or the number of customers who would buy.</p><ul>'+
 '<li>Top-down: start with a large number, then refine and break it down until you reach the answer.</li>'+
-'<li>Bottom-up: start with a small number, then build up until you reach the answer.</li></ul>'+
+'<li>Bottom-up: start with a small number, then build up until you reach the answer.</li></ul>{{pic:mk_td}}{{pic:mk_flow}}'+
 '<h3>Two habits</h3><ul><li>Develop a structure before doing any math. Say your steps first.</li><li>Round numbers when appropriate. Use 320 million instead of 319 million. It keeps the math easy and reduces mistakes.</li></ul>'+
 '<h3>Trick: when the known part is a percent of the total</h3><p>If a part is 25% of the total, the part you already know is 75%. Divide by 0.75 to get the total. If stores are 60% of all sales, divide by 0.6. (My wording.)</p><h3>Rule of 72</h3><p>A shortcut for how long a market, company or investment takes to double: divide 72 by the annual growth rate (in %).</p><ul><li>9% growth: 72 ÷ 9 = about 8 years</li><li>12% growth: 72 ÷ 12 = about 6 years</li></ul>',
 example:'<p>Top-down: what is the yearly market for tires for personal vehicles in the US? The steps follow the video. The numbers are my assumptions, so state them out loud and invite correction.</p>'+
@@ -875,15 +887,15 @@ tbl(['Step','Math','Result'],[
 say('I will start with the US population, get to households, then cars, then tires, then multiply by how often tires are replaced and what they cost. That gives about $20 billion a year.')+
 '<p>Bottom-up example (mine): one coffee shop sells 200 cups a day for 300 days = 60,000 cups. With 50 shops that is 3M cups. At $4 each, the market is $12M.</p>',
 practice:[
- ['Practice 1: Market size of regular (non-electric) toothbrushes in the U.S.?','Steps: population, % who brush, % who use regular brushes, brushes a year, cost. 320M × 90% = 288M. × 75% = 216M. × 10 = 2.16B brushes. × $2 = $4.32B.'],
- ['Practice 2: How many TV ads are shown in the U.S. each day?','Steps: channels, hours on air, % ads, ad length. 2,000 × 24 = 48,000 hours. × 25% = 12,000 hours of ads. × 60 = 720,000 minutes. ÷ 0.5 minute = 1.44M ads.'],
- ['Practice 3: Volume of beer (in oz.) sold at the average NBA game?','Steps: seats, % filled, % allowed to drink, % who buy, beers each, ounces per beer. 20,000 × 70% = 14,000. × 75% = 10,500. × 60% = 6,300. × 1 beer = 6,300. × 12 oz = 75,600 oz.'],
- ['Practice 4: How many iPhones does Apple sell in the U.S. each year?','Start with one Apple store: 1,000 × 360 = 360,000 visits. × 25% × 60% = 54,000. × 300 stores = 16.2M. Non-Apple stores are 25% of store sales: ÷ 0.75 = 21.6M. Online is 40% of all sales: ÷ 0.6 = 36M iPhones.'],
+ ['Practice 1: Market size of regular (non-electric) toothbrushes in the U.S.?','Steps: population, % who brush, % who use regular brushes, brushes a year, cost. 320M × 90% = 288M. × 75% = 216M. × 10 = 2.16B brushes. × $2 = $4.32B.','mk_q1'],
+ ['Practice 2: How many TV ads are shown in the U.S. each day?','Steps: channels, hours on air, % ads, ad length. 2,000 × 24 = 48,000 hours. × 25% = 12,000 hours of ads. × 60 = 720,000 minutes. ÷ 0.5 minute = 1.44M ads.','mk_q2'],
+ ['Practice 3: Volume of beer (in oz.) sold at the average NBA game?','Steps: seats, % filled, % allowed to drink, % who buy, beers each, ounces per beer. 20,000 × 70% = 14,000. × 75% = 10,500. × 60% = 6,300. × 1 beer = 6,300. × 12 oz = 75,600 oz.','mk_q3'],
+ ['Practice 4: How many iPhones does Apple sell in the U.S. each year?','Start with one Apple store: 1,000 × 360 = 360,000 visits. × 25% × 60% = 54,000. × 300 stores = 16.2M. Non-Apple stores are 25% of store sales: ÷ 0.75 = 21.6M. Online is 40% of all sales: ÷ 0.6 = 36M iPhones.','mk_q4'],
  ['A city of 1M people. 50% buy one $4 coffee a day. Yearly market? (Use 360 days.)','1M × 50% = 500K cups a day × $4 = $2M a day × 360 = $720M.'],
  ['Tires are replaced every 5 years instead of 4. New yearly market?','800M ÷ 5 = 160M tires × $100 = $16B.'],
  ['A market grows 6% a year. How long to double?','72 ÷ 6 = 12 years.'],
  ['A market doubles in 4 years. About what yearly growth?','72 ÷ 4 = about 18% a year.']],
-pics:['mk_td','mk_flow','mk_q1','mk_q2','mk_q3','mk_q4'],
+pics:[],
 cards:{
 "Practice cases":[
 ["Practice 1: toothbrush market. Answer?","$4.32B (320M × 90% × 75% × 10 brushes × $2)."],
@@ -997,13 +1009,13 @@ cards:{
 
 SECTIONS.push({id:'strategies',group:'3. Math skills',title:'Five math strategies',desc:'Distributive, round and adjust, factors, percentages, units',
 concept:'<ol>'+
-'<li><b>Use the distributive property.</b> Split a hard number into an easy part plus a small part, multiply each, then add.</li>'+
-'<li><b>Round, then adjust.</b> Round to an easy number, calculate, then subtract or add what you rounded. Rounded up: subtract. Rounded down: add.</li>'+
-'<li><b>Use factors.</b> Break a hard divisor into small factors and divide by each in turn.</li>'+
-'<li><b>Switch the percentages.</b> a% of b equals b% of a. Pick the easier one. (The video shows 25% of 32 = 8. The swap idea is the standard trick.)</li>'+
+'<li><b>Use the distributive property.</b> Split a hard number into an easy part plus a small part, multiply each, then add.</li></ol>{{pic:s1}}<ol start="2">'+
+'<li><b>Round, then adjust.</b> Round to an easy number, calculate, then subtract or add what you rounded. Rounded up: subtract. Rounded down: add.</li></ol>{{pic:s2}}<ol start="3">'+
+'<li><b>Use factors.</b> Break a hard divisor into small factors and divide by each in turn.</li></ol>{{pic:s3}}<ol start="4">'+
+'<li><b>Switch the percentages.</b> a% of b equals b% of a. Pick the easier one. (The video shows 25% of 32 = 8. The swap idea is the standard trick.)</li></ol>{{pic:s4}}<ol start="5">'+
 '<li><b>Multiply units instead of numbers.</b> Turn long numbers into K, M, B. Calculate the plain numbers, then work out the unit.</li></ol>'+
 tbl(['Unit rule','Example'],[['K × K = M','12K × 18K = 216M'],['M × K = B',''],['M ÷ K = K','1,680M ÷ 120K = 14K'],['B ÷ M = K',''],['B ÷ K = M','']])+
-'<p>Memory trick (mine): K = 1, M = 2, B = 3. Multiplying adds the numbers and dividing subtracts them.</p>'+
+'<p>Memory trick (mine): K = 1, M = 2, B = 3. Multiplying adds the numbers and dividing subtracts them.</p>{{pic:s5}}'+
 '<p>Sense check: missing or extra zeros are the most common mistake. Estimate first to check the size of your answer.</p>',
 example:'<ul>'+
 '<li>Distributive: 12 × 24 = (10 + 2) × 24 = 240 + 48 = 288. Also 303 × 60 = 18,000 + 180 = 18,180.</li>'+
@@ -1021,7 +1033,7 @@ practice:[
  ['$900M revenue across 30K customers. Average spend?','900M ÷ 30K = 30, and M ÷ K = K, so $30K.'],
  ['40K units × $25K each. Total revenue?','40 × 25 = 1,000, and K × K = M, so 1,000M = $1B.'],
  ['A teammate says 380 million × 19 = 72 billion. Sense check?','400M × 20 = 8 billion, so 72 billion is about 10 times too big. The exact answer is 7.22 billion.']],
-pics:['s1','s2','s3','s4','s5'],
+pics:[],
 cards:{
 "1 Distributive":[
 ["What is the distributive property strategy?","Split a hard number into an easy part plus a small part, multiply each, then add."],
@@ -1192,26 +1204,29 @@ function renderDeck(box){
   for(k=0;k<chips.length;k++){chips[k].setAttribute('aria-pressed',chips[k].getAttribute('data-grp')===name?'true':'false');}
 }
 
+var picCount=0;
+function expand(s){return String(s).replace(/\{\{pic:([a-z0-9_]+)\}\}/g,function(m,k){picCount+=1;return figHTML(k);});}
+
 function sectionHTML(sec,idx){
   var hd=HEADS[sec.id]||['Concept','Worked example','Practice'];
-  var meta=[],n=cardCount(sec),i;
-  if(n){meta.push(n+' cards');}
-  if(sec.pics.length){meta.push(sec.pics.length+(sec.pics.length===1?' picture':' pictures'));}
-  var badge=sec.starter?'<span class="badge warn">Starter cards</span>':'';
-  var h='<details class="sec" id="sec-'+sec.id+'"'+(idx===0?' open':'')+'><summary><span><span class="st">'+esc(sec.title)+badge+'</span><span class="sd">'+esc(sec.desc)+(meta.length?' · '+meta.join(' · '):'')+'</span></span></summary><div class="body">';
-  h+='<h3>'+hd[0]+'</h3>'+sec.concept;
-  h+='<h3>'+hd[1]+'</h3>'+sec.example;
-  h+='<h3>'+hd[2]+'</h3>';
-  for(i=0;i<sec.practice.length;i++){
-    h+='<details class="qa"><summary>'+esc(sec.practice[i][0])+'</summary><div class="ans">'+esc(sec.practice[i][1])+'</div></details>';
-  }
-  if(sec.after){h+=sec.after;}
+  var meta=[],n=cardCount(sec),i,body='',item;
+  picCount=0;
+  body+='<h3>'+hd[0]+'</h3>'+expand(sec.concept);
+  body+='<h3>'+hd[1]+'</h3>'+expand(sec.example);
   if(sec.pics.length){
-    h+='<h3>Pictures</h3>';
-    for(i=0;i<sec.pics.length;i++){h+=figHTML(sec.pics[i]);}
+    for(i=0;i<sec.pics.length;i++){body+=figHTML(sec.pics[i]);picCount+=1;}
   }
-  h+=cardsHTML(sec);
-  return h+'</div></details>';
+  body+='<h3>'+hd[2]+'</h3>';
+  for(i=0;i<sec.practice.length;i++){
+    item=sec.practice[i];
+    body+='<details class="qa"><summary>'+esc(item[0])+'</summary><div class="ans">'+esc(item[1])+'</div>'+(item[2]?(picCount+=1,figHTML(item[2])):'')+'</details>';
+  }
+  if(sec.after){body+=expand(sec.after);}
+  body+=cardsHTML(sec);
+  if(n){meta.push(n+' cards');}
+  if(picCount){meta.push(picCount+(picCount===1?' picture':' pictures'));}
+  var badge=sec.starter?'<span class="badge warn">Starter cards</span>':'';
+  return '<details class="sec" id="sec-'+sec.id+'"'+(idx===0?' open':'')+'><summary><span><span class="st">'+esc(sec.title)+badge+'</span><span class="sd">'+esc(sec.desc)+(meta.length?' · '+meta.join(' · '):'')+'</span></span></summary><div class="body">'+body+'</div></details>';
 }
 
 function build(){
@@ -1289,6 +1304,16 @@ document.getElementById('closeAll').addEventListener('click',function(){
   var d=document.querySelectorAll('details.sec'),i;for(i=0;i<d.length;i++){d[i].open=false;}
 });
 window.addEventListener('hashchange',openFromHash);
+var tb=document.getElementById('themeBtn'),TH=['auto','light','dark'];
+function curTheme(){var t=document.documentElement.getAttribute('data-theme');return (t==='light'||t==='dark')?t:'auto';}
+function showTheme(){var t=curTheme();tb.textContent='Theme: '+t.charAt(0).toUpperCase()+t.slice(1);}
+tb.addEventListener('click',function(){
+  var n=TH[(TH.indexOf(curTheme())+1)%3];
+  if(n==='auto'){document.documentElement.removeAttribute('data-theme');}else{document.documentElement.setAttribute('data-theme',n);}
+  try{if(n==='auto'){localStorage.removeItem('cp-theme');}else{localStorage.setItem('cp-theme',n);}}catch(err){}
+  showTheme();
+});
+showTheme();
 
 build();
 var figs=document.querySelectorAll('figure.pic'),f;
