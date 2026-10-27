@@ -88,6 +88,59 @@ figure.pic figcaption button{padding:4px 12px;min-height:36px}
 .fc .tx{display:block;font-size:15px;font-weight:500;line-height:1.5}
 .fc.flip{background:var(--accbg);border-color:var(--acc)}
 .fc.flip .lab,.fc.flip .tx{color:var(--acct)}
+
+.term{font:inherit;font-size:inherit;color:var(--acct);background:var(--accbg);border:0;border-bottom:1.5px dotted var(--acc);border-radius:4px;padding:0 4px;margin:0;min-height:0;cursor:pointer;line-height:inherit}
+.term:hover{background:var(--acc);color:var(--bg)}
+#tip{position:fixed;left:12px;right:12px;bottom:12px;max-width:736px;margin:0 auto;background:var(--card);border:1px solid var(--acc);border-radius:14px;padding:14px 16px;box-shadow:0 8px 30px rgba(0,0,0,.25);z-index:20}
+#tip[hidden]{display:none}
+#tip b.tt{display:block;font-size:16px;font-weight:600;color:var(--acct);margin-bottom:4px}
+#tip p{margin:0 0 10px;font-size:15px}
+#tip .tb{display:flex;gap:8px;flex-wrap:wrap}
+.donebox{margin:22px 0 0;padding-top:14px;border-top:.5px solid var(--line)}
+.donebtn[aria-pressed="true"]{background:var(--okbg);color:var(--okt);border-color:transparent}
+.sec.done>summary .st::after{content:"\2713 Done";font-size:12px;font-weight:400;margin-left:8px;padding:2px 8px;border-radius:8px;background:var(--okbg);color:var(--okt)}
+.prog{margin:8px 0 2px;font-size:13px;color:var(--muted)}
+.pbar{height:6px;background:var(--soft);border-radius:4px;margin-top:4px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+
+
+/* bigger headings and labels */
+h1{font-size:30px}
+h3{font-size:20px;font-weight:600;margin:26px 0 8px}
+.sec>summary .st{font-size:20px;font-weight:600}
+.sec>summary .sd{font-size:14px}
+.lbl,.body li>b:first-child{font-size:1.2em;font-weight:600;color:var(--acct)}
+.body table{font-size:15px}
+.body th{font-size:15px}
+figure.pic figcaption .ft{font-size:18px;font-weight:600}
+.toc b{font-size:16px}
+.toc a{font-size:15px}
+/* interactive affordances */
+:root{--tbg:#DAD6F7;--tul:#534AB7;--bd:rgba(31,30,27,.34);--sh:0 1px 2px rgba(31,30,27,.12)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--tbg:#3C3489;--tul:#AFA9EC;--bd:rgba(255,255,255,.3);--sh:none}}
+:root[data-theme="dark"]{--tbg:#3C3489;--tul:#AFA9EC;--bd:rgba(255,255,255,.3);--sh:none}
+button{border:1px solid var(--bd);box-shadow:var(--sh);background:var(--card)}
+button:hover{background:var(--accbg);border-color:var(--acc)}
+button:active{transform:translateY(1px)}
+.term{background:var(--tbg);color:var(--acct);border:0;border-bottom:2px solid var(--tul);box-shadow:none;font-weight:500;border-radius:4px 4px 0 0}
+.term:hover{background:var(--acc);color:var(--bg);border-bottom-color:var(--acc)}
+.term::after{content:"\24D8";font-size:.72em;vertical-align:super;margin-left:2px;opacity:.8}
+.sec{border:1px solid var(--bd);box-shadow:var(--sh)}
+.sec>summary:hover{background:var(--soft);border-radius:12px}
+.sec>summary::after{content:"+";display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:1px solid var(--bd);border-radius:50%;font-size:18px;margin-top:0}
+.sec[open]>summary::after{content:"\2212"}
+.qa{border:1px solid var(--bd);background:var(--card)}
+.qa summary{font-weight:500}
+.qa summary:hover{background:var(--soft);border-radius:8px}
+.fc{border:1px solid var(--bd);box-shadow:var(--sh);position:relative;padding-right:44px;background:var(--soft)}
+.fc::after{content:"\21BB";position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--acc)}
+.fc:hover{border-color:var(--acc);background:var(--accbg)}
+.fc.flip{border-color:var(--acc)}
+.chips button{background:var(--card)}
+.chips button[aria-pressed="true"]{background:var(--accbg);color:var(--acct);border-color:var(--acc);font-weight:500}
+.toc a{padding:6px 8px;border-radius:8px;margin:0 -8px}
+.toc a:hover{background:var(--accbg);text-decoration:none}
+.donebtn[aria-pressed="false"]{border-color:var(--acc);color:var(--acct)}
 /* diagrams */
 .c rect{fill:var(--f);stroke:var(--s);stroke-width:.5}
 .c .th{fill:var(--t1)}
@@ -132,10 +185,12 @@ figure.pic figcaption button{padding:4px 12px;min-height:36px}
 <p>A case interview gives you a business problem and asks you to think out loud and do quick math. Companies like Capital One use it for data analyst and data engineer roles. A framework is just a simple structure for organizing your thinking, so you do not freeze or miss something important.</p>
 <p>This page is a study kit in four parts: pick the approach, know the question types, sharpen your math, then practice and review. Every section follows the same order: the idea, a worked example, practice questions, pictures and flash cards.</p></div>
 <div class="how"><b>How to use this page</b>
-<ol><li>Open one section. Read the concept and the worked example.</li><li>Try the practice questions before you tap the answer.</li><li>Tap a flash card to flip it. Say the answer out loud first.</li></ol></div>
+<ol><li>Open one section. Read the concept and the worked example.</li><li>Try the practice questions before you tap the answer.</li><li>Tap a flash card to flip it. Say the answer out loud first.</li><li>Tap any highlighted term, like BCG matrix or Payback, to see what it means. Mark a section as done when you finish it.</li></ol></div>
 <div class="bar"><button type="button" id="openAll">Open all sections</button><button type="button" id="closeAll">Close all sections</button><button type="button" id="themeBtn" aria-label="Change colour theme">Theme: Auto</button></div>
+<div class="prog"><span id="progTxt"></span><div class="pbar"><i id="pfill"></i></div></div>
 <div class="toc" id="toc"></div>
 <div id="app"></div>
+<div id="tip" role="dialog" aria-live="polite" hidden></div>
 </div>
 <script>
 function T(cls,x,y,txt,anchor){return '<text class="'+cls+'" x="'+x+'" y="'+y+'" text-anchor="'+(anchor||'middle')+'" dominant-baseline="central">'+txt+'</text>';}
@@ -1223,6 +1278,7 @@ function sectionHTML(sec,idx){
   }
   if(sec.after){body+=expand(sec.after);}
   body+=cardsHTML(sec);
+  body+='<div class="donebox"><button type="button" class="donebtn" data-done="'+sec.id+'" aria-pressed="false">Mark this section as done</button></div>';
   if(n){meta.push(n+' cards');}
   if(picCount){meta.push(picCount+(picCount===1?' picture':' pictures'));}
   var badge=sec.starter?'<span class="badge warn">Starter cards</span>':'';
@@ -1315,7 +1371,131 @@ tb.addEventListener('click',function(){
 });
 showTheme();
 
+
+var TERMS=[
+ ['bcg','BCG matrix','BCG matrix','A grid that rates each product by market growth and your share of the market. It shows where to invest (Stars), what to milk for cash (Cash cows), what to test (Question marks) and what to fix or sell (Dogs). Use it when there are several products and limited money.','tools'],
+ ['tree','Profit tree','Profit tree','Profit = revenue minus cost. Split revenue into price × volume and cost into fixed and variable. Then find the branch that moved.','tools'],
+ ['threec','3Cs','3Cs','Company, customers, competitors. You need a yes on all three before you enter a market or launch a product.','tools'],
+ ['payback','Payback( period)?','Payback','Investment cost ÷ profit per year. It tells you how many years until you get your money back. Shorter is better.','invest'],
+ ['roi','ROI','ROI','Return on investment = profit ÷ investment cost. How much you earn for each dollar you put in.','invest'],
+ ['breakeven','Break-?even','Breakeven','The point where profit is exactly zero. Breakeven quantity = fixed costs ÷ (price − variable cost per unit).','profit'],
+ ['fixed','Fixed costs?','Fixed costs','Costs that stay the same however much you make, such as rent and salaries.','profit'],
+ ['variable','Variable costs?','Variable costs','Costs that change with how much you make, such as ingredients.','profit'],
+ ['star','Stars?','Star (BCG)','High market growth and high share. Invest to grow.','tools',['tools']],
+ ['cow','Cash cows?','Cash cow (BCG)','Slow market, high share. Milk it for steady cash.','tools',['tools']],
+ ['qmark','Question marks?','Question mark (BCG)','High growth but low share. Test it, then decide whether to back it.','tools',['tools']],
+ ['dog','Dogs?','Dog (BCG)','Slow market, low share. Fix it or sell it.','tools',['tools']],
+ ['topdown','Top-down','Top-down','Start with a large number, then refine and break it down until you reach the answer. Example: start with the U.S. population.','market'],
+ ['bottomup','Bottom-up','Bottom-up','Start with a small number, then build it up until you reach the answer. Example: start with one coffee shop.','market'],
+ ['msize','Market size','Market size','The total sales of a product or service in one year in a given region. It can also be units sold, or the number of customers who would buy.','market'],
+ ['r72','Rule of 72','Rule of 72','Years to double = 72 ÷ the yearly growth rate (in %). At 9% growth, 72 ÷ 9 = about 8 years.','market'],
+ ['bneck','bottleneck','Bottleneck','The slowest step in a process. It sets the pace for the whole line.','ops'],
+ ['util','Capacity utilization','Capacity utilization','Actual output ÷ maximum output. 10,000 visitors in a park that holds 40,000 is 25%.','ops'],
+ ['fw','frameworks?','Framework','A simple structure for organizing your thinking, so you cover the important areas and do not freeze.','frameworks'],
+ ['entry','Market entry','Market entry framework','Use it when a company wants to enter a new market or launch a new product: market attractiveness, competitive landscape, our capabilities, profitability.','frameworks',['frameworks']],
+ ['acq','Acquisition','Acquisition framework','Use it when a company wants to buy another: market attractiveness, competitive landscape, target company attractiveness, financial considerations.','frameworks',['frameworks']],
+ ['diag','Diagnosis','Diagnosis framework','Use it when profit or sales fell: numbers first (quantitative), then customers, competitors and the market (qualitative).','frameworks',['frameworks']],
+ ['threat','Competitive threat','Competitive threat framework','Use it when a competitor is moving in: threat size, customer response, competitor response, our options.','frameworks',['frameworks']],
+ ['distr','distributive property','Distributive property','Split a hard number into an easy part plus a small part, multiply each, then add. 12 × 24 = (10 + 2) × 24.','strategies'],
+ ['units','Multiply units','Multiply units','Turn long numbers into K, M and B. Calculate the plain numbers, then work out the unit. K × K = M.','strategies']
+];
+var TERMDEF={};
+(function(){var i;for(i=0;i<TERMS.length;i++){TERMDEF[TERMS[i][0]]={name:TERMS[i][2],def:TERMS[i][3],go:TERMS[i][4]};}})();
+var SKIP='svg,button,summary,details.qa,.fcs,h3,figure,.donebox,.say';
+
+function wrapTerms(root,secId){
+  var used={},nodes=[],w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,i;
+  while((n=w.nextNode())){
+    if(n.nodeValue.trim()&&!(n.parentNode.closest&&n.parentNode.closest(SKIP))){nodes.push(n);}
+  }
+  function proc(node){
+    var t=node.nodeValue,k,m,re,tm;
+    for(k=0;k<TERMS.length;k++){
+      tm=TERMS[k];
+      if(used[tm[0]]||(tm[5]&&tm[5].indexOf(secId)<0)){continue;}
+      re=new RegExp('(^|[^A-Za-z0-9])('+tm[1]+')(?![A-Za-z0-9])','i');
+      m=re.exec(t);
+      if(m){
+        used[tm[0]]=true;
+        var start=m.index+m[1].length,txt=m[2];
+        var before=document.createTextNode(t.slice(0,start)),after=document.createTextNode(t.slice(start+txt.length));
+        var b=document.createElement('button');
+        b.type='button';b.className='term';b.setAttribute('data-term',tm[0]);b.setAttribute('aria-haspopup','dialog');b.textContent=txt;
+        var par=node.parentNode;
+        par.insertBefore(before,node);par.insertBefore(b,node);par.insertBefore(after,node);par.removeChild(node);
+        proc(before);proc(after);
+        return;
+      }
+    }
+  }
+  for(i=0;i<nodes.length;i++){proc(nodes[i]);}
+}
+
+
+function labelLis(root){
+  var lis=root.querySelectorAll('li'),i,li,f,m,sp,rest;
+  for(i=0;i<lis.length;i++){
+    li=lis[i];
+    if(li.closest('details.qa,.fcs,.say')){continue;}
+    f=li.firstChild;
+    if(f&&f.nodeType===3){
+      m=/^(\s*)([^:\n]{2,44}):(\s|$)/.exec(f.nodeValue);
+      if(m){
+        sp=document.createElement('span');sp.className='lbl';sp.textContent=m[2]+':';
+        rest=document.createTextNode(' '+f.nodeValue.slice(m[0].length));
+        li.insertBefore(sp,f);li.insertBefore(rest,f);li.removeChild(f);
+      }
+    }
+  }
+}
+var tip=document.getElementById('tip'),tipFor=null;
+function closeTip(){tip.hidden=true;tipFor=null;}
+function openTip(btn){
+  var key=btn.getAttribute('data-term'),d=TERMDEF[key];
+  if(tipFor===btn){closeTip();return;}
+  tipFor=btn;
+  var cur=btn.closest('details.sec'),h='<b class="tt">'+esc(d.name)+'</b><p>'+esc(d.def)+'</p><div class="tb">';
+  if(d.go&&(!cur||cur.id!=='sec-'+d.go)){h+='<button type="button" data-goto="'+d.go+'">Go to this section</button>';}
+  h+='<button type="button" data-tipclose="1">Close</button></div>';
+  tip.innerHTML=h;tip.hidden=false;
+}
+function goTo(id){
+  var el=document.getElementById('sec-'+id);
+  if(el){el.open=true;closeTip();el.scrollIntoView();}
+}
+
+var DONE={};
+function loadDone(){try{DONE=JSON.parse(localStorage.getItem('cp-done')||'{}')||{};}catch(err){DONE={};}}
+function saveDone(){try{localStorage.setItem('cp-done',JSON.stringify(DONE));}catch(err){}}
+function paintDone(){
+  var secs=document.querySelectorAll('details.sec'),i,c=0,id,btn;
+  for(i=0;i<secs.length;i++){
+    id=secs[i].id.slice(4);
+    secs[i].classList.toggle('done',!!DONE[id]);
+    if(DONE[id]){c+=1;}
+    btn=secs[i].querySelector('.donebtn');
+    if(btn){btn.setAttribute('aria-pressed',DONE[id]?'true':'false');btn.textContent=DONE[id]?'Done. Tap to undo':'Mark this section as done';}
+  }
+  document.getElementById('progTxt').textContent=c+' of '+secs.length+' sections done';
+  document.getElementById('pfill').style.width=Math.round(c/secs.length*100)+'%';
+}
+
+document.addEventListener('click',function(e){
+  var t=e.target,term=t.closest?t.closest('.term'):null;
+  if(term){openTip(term);return;}
+  var g=t.closest?t.closest('[data-goto]'):null;
+  if(g){goTo(g.getAttribute('data-goto'));return;}
+  if(t.closest&&t.closest('[data-tipclose]')){closeTip();return;}
+  var db=t.closest?t.closest('.donebtn'):null;
+  if(db){var id=db.getAttribute('data-done');DONE[id]=!DONE[id];if(!DONE[id]){delete DONE[id];}saveDone();paintDone();return;}
+  if(!tip.hidden&&!(t.closest&&t.closest('#tip'))){closeTip();}
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeTip();}});
+
 build();
+loadDone();
+(function(){var secs=document.querySelectorAll('details.sec'),i;for(i=0;i<secs.length;i++){labelLis(secs[i].querySelector('.body'));wrapTerms(secs[i].querySelector('.body'),secs[i].id.slice(4));}})();
+paintDone();
 var figs=document.querySelectorAll('figure.pic'),f;
 for(f=0;f<figs.length;f++){applyZoom(figs[f]);}
 openFromHash();
