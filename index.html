@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Interview Numbers and Frameworks</title>
+<style>
+:root{
+  --bg:#faf9f5;--card:#ffffff;--soft:#f3f1ea;--text:#1f1e1b;--muted:#5d5b55;--line:rgba(31,30,27,.14);
+  --acc:#534AB7;--accbg:#EEEDFE;--acct:#3C3489;
+  --okbg:#EAF3DE;--okt:#27500A;--warnbg:#FAEEDA;--warnt:#633806;--arrow:#73726c;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#1a1a19;--card:#232321;--soft:#2c2c2a;--text:#f0efec;--muted:#b4b2a9;--line:rgba(255,255,255,.16);
+    --acc:#AFA9EC;--accbg:#3C3489;--acct:#CECBF6;--okbg:#27500A;--okt:#C0DD97;--warnbg:#633806;--warnt:#FAC775;--arrow:#9c9a92}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.65 var(--sans)}
+.wrap{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+a.back{display:inline-block;font-size:14px;color:var(--acc);text-decoration:none;padding:6px 0;margin:0 0 6px}
+a.back:hover{text-decoration:underline}
+h1{font-size:24px;line-height:1.3;font-weight:500;margin:0 0 6px}
+h2{font-size:18px;font-weight:500;margin:28px 0 8px}
+h3{font-size:15px;font-weight:500;margin:20px 0 6px;color:var(--acct)}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:4px}
+.lead{color:var(--muted);margin-bottom:14px}
+.how{background:var(--soft);border-radius:12px;padding:12px 16px;margin:0 0 16px}
+.how b{font-weight:500}
+.how ol{margin:6px 0 0}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer;min-height:40px}
+button:hover{background:var(--soft)}
+button:focus-visible,summary:focus-visible,.fc:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0 4px}
+.toc div{background:var(--card);border:.5px solid var(--line);border-radius:12px;padding:10px 14px}
+.toc b{font-weight:500;font-size:14px;display:block;margin-bottom:4px}
+.toc a{display:block;color:var(--acc);font-size:14px;text-decoration:none;padding:3px 0}
+.toc a:hover{text-decoration:underline}
+.sec{background:var(--card);border:.5px solid var(--line);border-radius:12px;margin:0 0 10px}
+.sec>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.sec>summary::-webkit-details-marker{display:none}
+.sec>summary .st{font-size:16px;font-weight:500;line-height:1.35}
+.sec>summary .sd{font-size:13px;color:var(--muted);display:block;margin-top:2px;font-weight:400}
+.sec>summary::after{content:"+";font-size:20px;line-height:1;color:var(--muted);flex:none;margin-top:2px}
+.sec[open]>summary::after{content:"\2212"}
+.sec .body{padding:0 16px 16px;border-top:.5px solid var(--line)}
+.grp{font-size:14px;font-weight:500;margin:22px 0 8px;color:var(--muted)}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:8px;background:var(--okbg);color:var(--okt);font-weight:400;margin-left:6px;vertical-align:1px}
+.badge.warn{background:var(--warnbg);color:var(--warnt)}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0 12px}
+th,td{border:.5px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:500}
+.tw{overflow-x:auto}
+.say{background:var(--accbg);color:var(--acct);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:15px}
+.say b{font-weight:500}
+.note{background:var(--warnbg);color:var(--warnt);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:14px}
+.qa{border:.5px solid var(--line);border-radius:8px;margin:0 0 8px;background:var(--bg)}
+.qa summary{cursor:pointer;padding:10px 12px;list-style:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::before{content:"\25B8";color:var(--muted);margin-right:8px}
+.qa[open] summary::before{content:"\25BE"}
+.qa .ans{padding:0 12px 10px 28px;color:var(--acct);font-weight:500}
+figure.pic{margin:14px 0;padding:0}
+figure.pic figcaption{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;font-size:14px}
+figure.pic figcaption .ft{font-weight:500;flex:1 1 100%}
+figure.pic figcaption button{padding:4px 12px;min-height:36px}
+.zl{font-size:13px;color:var(--muted);margin-left:auto}
+.zw{overflow-x:auto;border:.5px solid var(--line);border-radius:12px;padding:8px;background:var(--card)}
+.zw svg{display:block;width:100%;height:auto}
+.hint{font-size:12px;color:var(--muted);margin:6px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.chips button{padding:6px 12px;min-height:36px;font-size:13px}
+.chips button[aria-pressed="true"]{background:var(--accbg);color:var(--acct);border-color:var(--acc)}
+.cnt{font-size:12px;color:var(--muted);margin:0 0 8px}
+.fc{display:block;width:100%;text-align:left;margin:0 0 10px;padding:14px 16px;border-radius:12px;background:var(--soft);min-height:68px}
+.fc .lab{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.fc .tx{display:block;font-size:15px;font-weight:500;line-height:1.5}
+.fc.flip{background:var(--accbg);border-color:var(--acc)}
+.fc.flip .lab,.fc.flip .tx{color:var(--acct)}
+/* diagrams */
+.c rect{fill:var(--f);stroke:var(--s);stroke-width:.5}
+.c .th{fill:var(--t1)}
+.c .ts{fill:var(--t2)}
+.th{font:500 14px var(--sans);fill:var(--text)}
+.ts{font:400 12px var(--sans);fill:var(--muted)}
+.tx{font:400 10.5px var(--sans);fill:var(--muted)}
+.tl{font:400 12px var(--sans);fill:var(--muted)}
+.arr{stroke:var(--arrow);stroke-width:1.5}
+.ax{stroke:var(--arrow);stroke-width:1;fill:none}
+.ln{stroke:#185FA5;stroke-width:2.5;fill:none}
+.dt{fill:#185FA5}
+.dash{stroke:var(--arrow);stroke-width:1;stroke-dasharray:3 3}
+.c-purple{--f:#EEEDFE;--s:#534AB7;--t1:#3C3489;--t2:#534AB7}
+.c-teal{--f:#E1F5EE;--s:#0F6E56;--t1:#085041;--t2:#0F6E56}
+.c-coral{--f:#FAECE7;--s:#993C1D;--t1:#712B13;--t2:#993C1D}
+.c-pink{--f:#FBEAF0;--s:#993556;--t1:#72243E;--t2:#993556}
+.c-blue{--f:#E6F1FB;--s:#185FA5;--t1:#0C447C;--t2:#185FA5}
+.c-amber{--f:#FAEEDA;--s:#854F0B;--t1:#633806;--t2:#854F0B}
+.c-gray{--f:#F1EFE8;--s:#5F5E5A;--t1:#444441;--t2:#5F5E5A}
+@media (prefers-color-scheme:dark){
+  .c-purple{--f:#3C3489;--s:#AFA9EC;--t1:#CECBF6;--t2:#AFA9EC}
+  .c-teal{--f:#085041;--s:#5DCAA5;--t1:#9FE1CB;--t2:#5DCAA5}
+  .c-coral{--f:#712B13;--s:#F0997B;--t1:#F5C4B3;--t2:#F0997B}
+  .c-pink{--f:#72243E;--s:#ED93B1;--t1:#F4C0D1;--t2:#ED93B1}
+  .c-blue{--f:#0C447C;--s:#85B7EB;--t1:#B5D4F4;--t2:#85B7EB}
+  .c-amber{--f:#633806;--s:#EF9F27;--t1:#FAC775;--t2:#EF9F27}
+  .c-gray{--f:#444441;--s:#B4B2A9;--t1:#D3D1C7;--t2:#B4B2A9}
+}
+@media (prefers-color-scheme:dark){.ln{stroke:#85B7EB}.dt{fill:#85B7EB}}
+@media print{.bar,figure.pic figcaption button,.chips{display:none}.sec .body{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="knowledge-bank.html">&larr; Back to the knowledge bank</a>
+<h1>Case interview numbers and frameworks</h1>
+<p class="lead">Short sections you can open one at a time. Each one goes concept, worked example, practice, pictures, then flash cards.</p>
+<div class="how"><b>How to use this page</b>
+<ol><li>Open one section. Read the concept and the worked example.</li><li>Try the practice questions before you tap the answer.</li><li>Tap a flash card to flip it. Say the answer out loud first.</li></ol></div>
+<div class="bar"><button type="button" id="openAll">Open all sections</button><button type="button" id="closeAll">Close all sections</button></div>
+<div class="toc" id="toc"></div>
+<div id="app"></div>
+</div>
+<script>
+function T(cls,x,y,txt,anchor){return '<text class="'+cls+'" x="'+x+'" y="'+y+'" text-anchor="'+(anchor||'middle')+'" dominant-baseline="central">'+txt+'</text>';}
+function B(c,x,y,w,h,t,s){
+  var cx=x+w/2;
+  var o='<g class="c c-'+c+'"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="8"/>';
+  if(s){o+=T('th',cx,y+h*0.35,t)+T('ts',cx,y+h*0.7,s);}else{o+=T('th',cx,y+h/2,t);}
+  return o+'</g>';
+}
+function Q(c,x,y,w,h,t){
+  return '<g class="c c-'+c+'"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="8"/>'+T('ts',x+w/2,y+h/2,t)+'</g>';
+}
+function B3(c,x,y,w,h,t,s,e){
+  var cx=x+w/2;
+  return '<g class="c c-'+c+'"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="8"/>'+T('th',cx,y+26,t)+T('ts',cx,y+50,s)+T('ts',cx,y+78,e)+'</g>';
+}
+function P(id,d){return '<path d="'+d+'" class="arr" fill="none" marker-end="url(#ar-'+id+')"/>';}
+function SV(id,vw,vh,title,desc,body){
+  return '<svg viewBox="0 0 '+vw+' '+vh+'" role="img" aria-labelledby="t-'+id+' d-'+id+'"><title id="t-'+id+'">'+title+'</title><desc id="d-'+id+'">'+desc+'</desc><defs><marker id="ar-'+id+'" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" style="stroke:var(--arrow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>'+body+'</svg>';
+}
+
+function fwTree(id,title,desc,rootT,rootS,branches,xo){
+  var xs=xo||[20,185,350,515],b='',maxN=0,i,k;
+  for(i=0;i<branches.length;i++){if(branches[i].items.length>maxN){maxN=branches[i].items.length;}}
+  b+=P(id,'M340 65 L340 85 L'+(xs[0]+72.5)+' 85 L'+(xs[0]+72.5)+' 103');
+  for(i=1;i<branches.length;i++){b+=P(id,'M340 85 L'+(xs[i]+72.5)+' 85 L'+(xs[i]+72.5)+' 103');}
+  b+=B('gray',240,15,200,50,rootT,rootS);
+  for(i=0;i<branches.length;i++){
+    var br=branches[i];
+    b+=B(br.c,xs[i],105,145,56,br.t1,br.t2);
+    for(k=0;k<br.items.length;k++){b+=Q(br.c,xs[i],175+50*k,145,40,br.items[k]);}
+  }
+  var H=175+50*(maxN-1)+40+25;
+  return SV(id,680,H,title,desc,b);
+}
+
+var DIAGRAMS={
+
+bcg:{title:'BCG matrix: where to put the money',vb:'380',svg:function(){
+  var id='bcg',b='';
+  b+=T('th',125,18,'High share')+T('th',285,18,'Low share');
+  b+=T('ts',24,86,'High')+T('ts',24,102,'growth')+T('ts',24,206,'Low')+T('ts',24,222,'growth');
+  b+=B3('purple',50,34,150,110,'Star','Invest to grow','e.g. water park');
+  b+=B3('coral',210,34,150,110,'Question mark','Test, then pick','e.g. premium pass');
+  b+=B3('teal',50,154,150,110,'Cash cow','Milk it for cash','e.g. food stands');
+  b+=B3('gray',210,154,150,110,'Dog','Fix or sell','e.g. old arcade');
+  return SV(id,380,284,'BCG matrix with amusement park examples','Two by two grid. Top row is high market growth: Star with high share, Question mark with low share. Bottom row is low growth: Cash cow with high share, Dog with low share.',b);
+}},
+
+tree:{title:'Profit tree: find the branch that moved',svg:function(){
+  var id='tree',b='';
+  b+=P(id,'M340 76 L340 98 L185 98 L185 118')+P(id,'M340 98 L495 98 L495 118');
+  b+=P(id,'M185 176 L185 198 L110 198 L110 218')+P(id,'M185 198 L260 198 L260 218');
+  b+=P(id,'M495 176 L495 198 L420 198 L420 218')+P(id,'M495 198 L570 198 L570 218');
+  b+=B('gray',240,20,200,56,'Profit','$50M = $150M − $100M');
+  b+=B('teal',85,120,200,56,'Revenue','$150M');
+  b+=B('coral',395,120,200,56,'Cost','$100M');
+  b+=B('teal',45,220,130,56,'Price','$50 a visitor');
+  b+=B('teal',195,220,130,56,'Visitors','3M a year');
+  b+=B('coral',355,220,130,56,'Fixed cost','rent, insurance');
+  b+=B('coral',505,220,130,56,'Variable cost','food, staff');
+  return SV(id,680,300,'Profit tree','Profit splits into revenue and cost. Revenue is price times visitors. Cost is fixed cost plus variable cost.',b);
+}},
+
+threec:{title:'3Cs: should we enter this market?',svg:function(){
+  var id='threec',b='';
+  b+=P(id,'M130 110 L130 140 L300 140 L300 166')+P(id,'M340 110 L340 166')+P(id,'M550 110 L550 140 L380 140 L380 166');
+  b+=B3('purple',35,20,190,90,'Company','Can we do it?','skills, money, land');
+  b+=B3('teal',245,20,190,90,'Customers','Do they want it?','size, needs, price');
+  b+=B3('coral',455,20,190,90,'Competitors','Who else is there?','their strength, prices');
+  b+=B('gray',240,170,200,56,'Enter the market?','need a yes on all three');
+  return SV(id,680,250,'The 3Cs framework','Three boxes, company, customers and competitors, each with a question. All three point to a decision box asking whether to enter the market.',b);
+}},
+
+payback:{title:'Payback: years to get your money back',svg:function(){
+  var id='payback',b='',i,x;
+  b+=T('th',32,28,'A: Lease land','start')+T('ts',32,48,'Cost $10M, earns $1M a year','start');
+  for(i=0;i<10;i++){x=32+i*32;b+='<g class="c c-coral"><rect x="'+x+'" y="62" width="28" height="28" rx="4"/>'+T('ts',x+14,76,String(i+1))+'</g>';}
+  b+=T('th',32,112,'Payback: 10 years','start');
+  b+=T('th',32,152,'B: Pricing change','start')+T('ts',32,172,'Cost $2M, earns $1M a year','start');
+  for(i=0;i<2;i++){x=32+i*32;b+='<g class="c c-teal"><rect x="'+x+'" y="186" width="28" height="28" rx="4"/>'+T('ts',x+14,200,String(i+1))+'</g>';}
+  b+=T('th',32,236,'Payback: 2 years','start')+T('ts',32,264,'Payback = cost ÷ yearly profit','start');
+  return SV(id,380,290,'Payback comparison','Option A costs 10 million dollars and earns 1 million a year, so it takes 10 years to pay back. Option B costs 2 million and earns 1 million a year, so it takes 2 years.',b);
+}},
+
+fw1:{title:'Framework 1: market entry (organic pineapple)',svg:function(){
+  return fwTree('fw1','Market entry framework','Four branches: organic market attractiveness, competitive landscape, Pineapple Co. capabilities and profitability.','Practice question 1','organic pineapple',[
+    {c:'purple',t1:'Organic market',t2:'attractiveness',items:['Market size?','Growth rate?','Profit margins?']},
+    {c:'teal',t1:'Competitive',t2:'landscape',items:['How many rivals?','Their share?','Their advantages?']},
+    {c:'coral',t1:'Pineapple Co.',t2:'capabilities',items:['Organic expertise?','Distribution?']},
+    {c:'pink',t1:'Profitability',t2:'',items:['Expected revenues?','Expected costs?','Break-even time?']}]);
+}},
+
+fw2:{title:'Framework 2: profit or sales fell (diagnosis)',svg:function(){
+  var id='fw2',b='';
+  b+=P(id,'M340 65 L340 93')+P(id,'M340 80 L92.5 80 L92.5 93');
+  b+=P(id,'M92.5 139 L92.5 163')+P(id,'M422.5 139 L422.5 163')+P(id,'M422.5 151 L257.5 151 L257.5 163')+P(id,'M422.5 151 L587.5 151 L587.5 163');
+  b+=B('gray',240,15,200,50,'Practice question 2','what changed?');
+  b+=B('purple',20,95,145,44,'Quantitative');
+  b+=B('gray',185,95,475,44,'Qualitative');
+  b+=B('purple',20,165,145,56,'Profit drivers');
+  b+=Q('purple',20,235,145,40,'Revenue down?')+Q('purple',20,285,145,40,'Price or quantity?')+Q('purple',20,335,145,40,'Costs up?');
+  b+=B('teal',185,165,145,56,'Customer needs','and preferences');
+  b+=Q('teal',185,235,145,40,'Needs changed?')+Q('teal',185,285,145,40,'Habits changed?')+Q('teal',185,335,145,40,'Seen differently?');
+  b+=B('coral',350,165,145,56,'Competitors');
+  b+=Q('coral',350,235,145,40,'New players?')+Q('coral',350,285,145,40,'Rival moves?')+Q('coral',350,335,145,40,'Rivals declining?');
+  b+=B('pink',515,165,145,56,'Market');
+  b+=Q('pink',515,235,145,40,'New technology?')+Q('pink',515,285,145,40,'New regulations?');
+  return SV(id,680,400,'Diagnosis framework: quantitative and qualitative','Quantitative branch checks profit drivers: revenue and costs. Qualitative branch checks customer needs, competitors and the market.',b);
+}},
+
+fw3:{title:'Framework 3: a new competitor opens (casino)',svg:function(){
+  return fwTree('fw3','Competitive threat framework','Four branches: new casino threat size, customer response, competitor response and Gaming Co. strategic options.','Practice question 3','new casino nearby',[
+    {c:'purple',t1:'New casino',t2:'threat size',items:['How large?','How close to ours?','Its advantages?']},
+    {c:'teal',t1:'Customer',t2:'response',items:['Customer reaction?','Will ours switch?']},
+    {c:'coral',t1:'Competitor',t2:'response',items:['Open a new casino?','Close casinos?','Improve casinos?']},
+    {c:'pink',t1:'Gaming Co.',t2:'strategic options',items:['Do nothing?','Open a new casino?','Close casinos?','Improve casinos?']}]);
+}},
+
+fw4:{title:'Framework 4: buying a company (roofing tile)',svg:function(){
+  return fwTree('fw4','Acquisition framework','Four branches: roofing tile market attractiveness, competitive landscape, target company attractiveness and financial considerations.','Practice question 4','buy a roofing tile firm',[
+    {c:'purple',t1:'Roofing market',t2:'attractiveness',items:['Market size?','Growth rate?','Profit margins?']},
+    {c:'teal',t1:'Competitive',t2:'landscape',items:['How many rivals?','Their share?','Their advantages?']},
+    {c:'coral',t1:'Target company',t2:'attractiveness',items:['Is it profitable?','Its market share?','Differentiation?']},
+    {c:'pink',t1:'Financial',t2:'considerations',items:['Is the price fair?','Room to improve?','Expected returns?']}]);
+}},
+
+pizza:{title:'Pizza store: what makes up profit',svg:function(){
+  var id='pizza',b='';
+  b+=P(id,'M340 76 L340 98 L180 98 L180 118')+P(id,'M340 98 L500 98 L500 118');
+  b+=P(id,'M180 176 L180 198 L100 198 L100 218')+P(id,'M180 198 L260 198 L260 218');
+  b+=P(id,'M500 176 L500 198 L420 198 L420 218')+P(id,'M500 198 L580 198 L580 218');
+  b+=B('gray',240,20,200,56,'Profit','$300K = $1M − $700K');
+  b+=B('teal',80,120,200,56,'Revenue','$1M = quantity × price');
+  b+=B('coral',400,120,200,56,'Costs','$700K = $400K + $300K');
+  b+=B('teal',30,220,140,56,'Quantity','100,000 pizzas');
+  b+=B('teal',190,220,140,56,'Price','$10 each');
+  b+=B('coral',350,220,140,56,'Variable costs','$4 each = $400K');
+  b+=B('coral',510,220,140,56,'Fixed costs','$300K (rent, pay)');
+  return SV(id,680,300,'Pizza store profit breakdown','Profit of 300 thousand splits into revenue of 1 million and costs of 700 thousand. Revenue is quantity times price. Costs are variable costs plus fixed costs.',b);
+}},
+
+breakeven:{title:'Breakeven in four steps',svg:function(){
+  var id='breakeven',b='';
+  b+=P(id,'M167 62 L193 62')+P(id,'M327 62 L353 62')+P(id,'M487 62 L513 62')+P(id,'M420 94 L420 128');
+  b+=B('purple',35,30,130,64,'1. Write it','6 × Q − $300K');
+  b+=B('purple',195,30,130,64,'2. Profit = 0','0 = 6Q − $300K');
+  b+=B('teal',355,30,130,64,'3. Solve for Q','Q = 50,000');
+  b+=B('gray',515,30,130,64,'4. Check it','$500K = $500K');
+  b+=B('teal',240,130,360,56,'Break-even: 50,000 pizzas','More than that is profit, fewer is a loss');
+  return SV(id,680,220,'Breakeven in four steps','Write the profit equation, set profit to zero, solve for Q which gives 50,000 pizzas, then check that revenue equals costs.',b);
+}},
+
+roi:{title:'ROI versus payback',svg:function(){
+  var id='roi',b='';
+  b+=P(id,'M340 76 L340 98 L185 98 L185 118')+P(id,'M340 98 L495 98 L495 118')+P(id,'M185 176 L185 218')+P(id,'M495 176 L495 218');
+  b+=B('gray',240,20,200,56,'Investment','cash today for more later');
+  b+=B('purple',65,120,240,56,'ROI: how much do we earn?','Profit ÷ investment cost');
+  b+=B('teal',375,120,240,56,'Payback: how long?','Cost ÷ profit per year');
+  b+=B('purple',65,220,240,56,'30% return','$30M profit on $100M');
+  b+=B('teal',375,220,240,56,'5 years','$20M cost, $4M a year');
+  return SV(id,680,300,'ROI versus payback period','An investment leads to two questions. How much do we earn, answered by ROI, for example 30 percent on a 100 million dollar deal. How long to get the money back, answered by payback period, for example 5 years on a 20 million dollar purchase.',b);
+}},
+
+s1:{title:'Strategy 1: distributive property',svg:function(){
+  var id='s1',b='';
+  b+=P(id,'M340 76 L340 98 L210 98 L210 118')+P(id,'M340 98 L470 98 L470 118')+P(id,'M210 176 L210 198 L340 198 L340 218')+P(id,'M470 176 L470 198 L340 198 L340 218');
+  b+=B('gray',240,20,200,56,'303 × 60','split 303 into 300 + 3');
+  b+=B('purple',100,120,220,56,'60 × 300','= 18,000');
+  b+=B('purple',360,120,220,56,'60 × 3','= 180');
+  b+=B('teal',220,220,240,56,'18,000 + 180','= 18,180');
+  return SV(id,680,300,'Distributive property','303 times 60 splits into 60 times 300 equals 18,000 and 60 times 3 equals 180, which add to 18,180.',b);
+}},
+
+s2:{title:'Strategy 2: round, then adjust',svg:function(){
+  var id='s2',b='';
+  b+=P(id,'M172 62 L188 62')+P(id,'M332 62 L348 62')+P(id,'M492 62 L508 62');
+  b+=B('purple',30,30,140,64,'1. Round up','490 → 500');
+  b+=B('purple',190,30,140,64,'2. Easy math','22 × 500 = 11,000');
+  b+=B('coral',350,30,140,64,'3. Fix it','22 × 10 = 220');
+  b+=B('teal',510,30,140,64,'11,000 − 220','= 10,780');
+  b+=B('gray',160,130,360,56,'Rounded up: subtract','Rounded down: add it back');
+  return SV(id,680,215,'Round and adjust','490 times 22. Round 490 up to 500, calculate 22 times 500 equals 11,000, take off 22 times 10 equals 220, to get 10,780. If you round up, subtract. If you round down, add.',b);
+}},
+
+s3:{title:'Strategy 3: divide by factors',svg:function(){
+  var id='s3',b='';
+  b+=B('gray',220,15,240,56,'4,560 ÷ 24','24 = 2 × 2 × 2 × 3');
+  b+=T('ts',145,120,'÷ 2')+T('ts',275,120,'÷ 2')+T('ts',405,120,'÷ 2')+T('ts',535,120,'÷ 3');
+  b+=P(id,'M132 138 L158 138')+P(id,'M262 138 L288 138')+P(id,'M392 138 L418 138')+P(id,'M522 138 L548 138');
+  b+=B('gray',30,110,100,56,'4,560');
+  b+=B('purple',160,110,100,56,'2,280');
+  b+=B('purple',290,110,100,56,'1,140');
+  b+=B('purple',420,110,100,56,'570');
+  b+=B('teal',550,110,100,56,'190');
+  return SV(id,680,200,'Use factors to divide in steps','4,560 divided by 24, where 24 is 2 times 2 times 2 times 3. Divide by 2 to get 2,280, by 2 to get 1,140, by 2 to get 570, then by 3 to get 190.',b);
+}},
+
+s4:{title:'Strategy 4: switch the percentages',svg:function(){
+  var id='s4',b='';
+  b+='<line x1="304" y1="58" x2="376" y2="58" class="arr" marker-start="url(#ar-s4)" marker-end="url(#ar-s4)"/>';
+  b+=P(id,'M200 86 L200 108 L340 108 L340 128')+P(id,'M480 86 L480 108 L340 108 L340 128');
+  b+=B('purple',100,30,200,56,'25% of 32','percent first');
+  b+=B('purple',380,30,200,56,'32% of 25','swapped');
+  b+=B('teal',240,130,200,56,'Both equal 8','pick the easier one');
+  b+=B('gray',200,215,280,56,'4% of 75 = 75% of 4','= 3 (much easier)');
+  return SV(id,680,295,'Switch the percentages','25 percent of 32 and 32 percent of 25 are the same, both equal 8. A second example: 4 percent of 75 equals 75 percent of 4, which is 3.',b);
+}},
+
+s5:{title:'Strategy 5: multiply units, not numbers',svg:function(){
+  var id='s5',b='';
+  b+=P(id,'M222 65 L243 65')+P(id,'M437 65 L458 65');
+  b+=B('gray',30,30,190,70,'K (level 1)','thousand: 1,000');
+  b+=B('gray',245,30,190,70,'M (level 2)','million: 1,000,000');
+  b+=B('gray',460,30,190,70,'B (level 3)','billion: 1,000,000,000');
+  b+=B('purple',30,130,190,56,'K × K = M','1 + 1 = 2');
+  b+=B('purple',245,130,190,56,'M × K = B','2 + 1 = 3');
+  b+=B('coral',460,130,190,56,'M ÷ K = K','2 − 1 = 1');
+  b+=B('coral',30,206,190,56,'B ÷ M = K','3 − 2 = 1');
+  b+=B('coral',245,206,190,56,'B ÷ K = M','3 − 1 = 2');
+  b+=B('teal',460,206,190,56,'12K × 18K','216 × M = 216M');
+  return SV(id,680,290,'Multiply units instead of numbers','K is level 1, M is level 2, B is level 3. Multiplying adds levels and dividing subtracts them. K times K is M, M times K is B, M divided by K is K, B divided by M is K, B divided by K is M. Example: 12K times 18K is 216M.',b);
+}}
+
+};
+/* ---- ten chart types ---- */
+var CH={
+  gray:'c-amber',pur:'c-blue',teal:'c-pink',cor:'c-coral'
+};
+function cr(c,x,y,w,h){return '<g class="c '+c+'"><rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="0"/></g>';}
+function axes(x0,yb,x1,yt){return '<path class="ax" d="M'+x0+' '+yt+' L'+x0+' '+yb+' L'+x1+' '+yb+'"/>';}
+function ytick(x0,y,lab){return '<line class="ax" x1="'+(x0-4)+'" y1="'+y.toFixed(1)+'" x2="'+x0+'" y2="'+y.toFixed(1)+'"/>'+T('ts',x0-7,y,lab,'end');}
+function legend(items,y,x0){
+  var o='',x=(x0===undefined?50:x0),i;
+  for(i=0;i<items.length;i++){
+    o+='<g class="c '+items[i][0]+'"><rect x="'+x+'" y="'+(y-6)+'" width="12" height="12" rx="2"/></g>'+T('ts',x+17,y,items[i][1],'start');
+    x+=items[i][2];
+  }
+  return o;
+}
+function cap(a,b,y){return T('th',190,y,a)+T('ts',190,y+18,b);}
+function chart(id,title,desc,body,H){return SV(id,380,H||290,title,desc,body);}
+
+
+DIAGRAMS.ch_bar={title:'Simple bar chart',svg:function(){
+  var b='',v=[3500,1800,4200],n=['Product A','Product B','Product C'],i,h;
+  b+=T('ts',50,14,'Sales ($)','start')+axes(50,200,360,40);
+  b+=ytick(50,200,'0')+ytick(50,125,'2,500')+ytick(50,50,'5,000');
+  for(i=0;i<3;i++){h=v[i]*0.03;
+    b+=cr(CH.pur,80+i*100,200-h,60,h)+T('th',110+i*100,200-h-11,'$'+v[i].toLocaleString('en-US'))+T('ts',110+i*100,216,n[i]);}
+  b+=cap('Compares a single variable','Look for: the tallest and the shortest bar.',250);
+  return chart('ch_bar','Simple bar chart','Bars compare one number across groups: Product A 3,500 dollars, Product B 1,800 dollars, Product C 4,200 dollars. Product C is tallest.',b,285);
+}};
+
+var SEG=[[1500,3000,500],[3200,3600,1200],[1000,1200,800]],GRP=['Region 1','Region 2','Region 3'],SEGN=[['Product A',90],['Product B',90],['Product C',90]];
+function segLegend(cl,y){return legend([[cl[0],'Product A',95],[cl[1],'Product B',95],[cl[2],'Product C',90]],y);}
+
+DIAGRAMS.ch_stack={title:'Stacked bar chart',svg:function(){
+  var b='',cl=[CH.gray,CH.pur,CH.teal],i,j,y,h,tot,s=0.015;
+  b+=T('ts',50,14,'Sales ($)','start')+axes(50,200,360,40);
+  b+=ytick(50,200,'0')+ytick(50,125,'5,000')+ytick(50,50,'10,000');
+  for(i=0;i<3;i++){y=200;tot=0;
+    for(j=0;j<3;j++){h=SEG[i][j]*s;y-=h;tot+=SEG[i][j];b+=cr(cl[j],80+i*100,y,60,h);}
+    b+=T('th',110+i*100,y-11,'$'+tot.toLocaleString('en-US'))+T('ts',110+i*100,216,GRP[i]);}
+  b+=segLegend(cl,238);
+  b+=cap('Compares one variable and shows its parts','Look for: which bar is biggest, then which part drives it.',266);
+  return chart('ch_stack','Stacked bar chart','Each bar is split into products A, B and C. Region 1 is 5,000 dollars, Region 2 is 8,000 dollars, Region 3 is 3,000 dollars.',b,305);
+}};
+
+DIAGRAMS.ch_pct={title:'100% stacked bar chart',svg:function(){
+  var b='',cl=[CH.gray,CH.pur,CH.teal],i,j,y,h,tot,p;
+  b+=T('ts',50,14,'% of sales','start')+axes(50,200,360,50);
+  b+=ytick(50,200,'0')+ytick(50,150,'50%')+ytick(50,50,'100%');
+  for(i=0;i<3;i++){y=200;tot=SEG[i][0]+SEG[i][1]+SEG[i][2];
+    for(j=0;j<3;j++){p=SEG[i][j]/tot;h=p*150;y-=h;b+=cr(cl[j],80+i*100,y,60,h)+T('ts',110+i*100,y+h/2,Math.round(p*100)+'%');}
+    b+=T('th',110+i*100,38,'$'+tot.toLocaleString('en-US'))+T('ts',110+i*100,216,GRP[i]);}
+  b+=segLegend(cl,238);
+  b+=cap('Shows each part as a % of its bar','Look for: how the mix differs between bars, not the size.',266);
+  return chart('ch_pct','100% stacked bar chart','Every bar is the same height. Region 1 is 30 percent A, 60 percent B, 10 percent C. Region 2 is 40, 45, 15. Region 3 is 33, 40, 27.',b,305);
+}};
+
+DIAGRAMS.ch_pie={title:'Pie chart',svg:function(){
+  var b='',cx=110,cy=115,r=80,vals=[[45,CH.pur,'Product A 45%'],[35,CH.gray,'Product B 35%'],[20,CH.teal,'Product C 20%']],a=-Math.PI/2,i,a2,x1,y1,x2,y2,big;
+  for(i=0;i<3;i++){
+    a2=a+vals[i][0]/100*2*Math.PI;
+    x1=cx+r*Math.cos(a);y1=cy+r*Math.sin(a);x2=cx+r*Math.cos(a2);y2=cy+r*Math.sin(a2);
+    big=(a2-a)>Math.PI?1:0;
+    b+='<g class="c '+vals[i][1]+'"><path d="M'+cx+' '+cy+' L'+x1.toFixed(1)+' '+y1.toFixed(1)+' A'+r+' '+r+' 0 '+big+' 1 '+x2.toFixed(1)+' '+y2.toFixed(1)+' Z" fill="var(--f)" stroke="var(--s)" stroke-width="1.5"/></g>';
+    a=a2;
+  }
+  for(i=0;i<3;i++){b+='<g class="c '+vals[i][1]+'"><rect x="215" y="'+(78+i*28)+'" width="12" height="12" rx="2"/></g>'+T('ts',233,84+i*28,vals[i][2],'start');}
+  b+=cap('Shows each part as a % of one total','Look for: the biggest slice. The parts add to 100%.',235);
+  return chart('ch_pie','Pie chart','One pie split into Product A 45 percent, Product B 35 percent and Product C 20 percent.',b,275);
+}};
+
+DIAGRAMS.ch_line={title:'Line graph',svg:function(){
+  var b='',v=[5,12,25,45,58],i,pts=[],x,y;
+  b+=T('ts',50,14,'Annual revenue ($M)','start')+axes(50,200,360,40);
+  b+=ytick(50,200,'0')+ytick(50,150,'20')+ytick(50,100,'40')+ytick(50,50,'60');
+  for(i=0;i<5;i++){x=80+i*66;y=200-v[i]*2.5;pts.push(x+','+y);}
+  b+='<polyline class="ln" points="'+pts.join(' ')+'"/>';
+  for(i=0;i<5;i++){x=80+i*66;y=200-v[i]*2.5;b+='<circle class="dt" cx="'+x+'" cy="'+y+'" r="4"/>'+T('th',x,y-13,'$'+v[i]+'M')+T('ts',x,216,'Year '+(i+1));}
+  b+=cap('Shows how one number changes over time','Look for: the steepest part of the line (Year 3 to Year 4).',250);
+  return chart('ch_line','Line graph','Revenue rises each year: 5, 12, 25, 45 and 58 million dollars. The steepest rise is between Year 3 and Year 4.',b,285);
+}};
+
+DIAGRAMS.ch_hist={title:'Histogram',svg:function(){
+  var b='',v=[8,20,30,16,6],n=['0-10','11-20','21-30','31-40','41+'],i,h;
+  b+=T('ts',50,14,'Count (thousands)','start')+axes(50,200,360,40);
+  b+=ytick(50,200,'0')+ytick(50,125,'20K')+ytick(50,50,'40K');
+  for(i=0;i<5;i++){h=v[i]*3.75;
+    b+=cr(CH.pur,62+i*58,200-h,54,h)+T('th',89+i*58,200-h-11,v[i]+'K')+T('ts',89+i*58,216,n[i]);}
+  b+=T('ts',205,234,'Range of values');
+  b+=cap('Shows how many fall in each range','Look for: the tallest range. It is the most common group.',262);
+  return chart('ch_hist','Histogram','Counts by range: 0 to 10 is 8 thousand, 11 to 20 is 20 thousand, 21 to 30 is 30 thousand, 31 to 40 is 16 thousand, 41 plus is 6 thousand.',b,300);
+}};
+
+DIAGRAMS.ch_scat={title:'Scatterplot',svg:function(){
+  var b='',p=[[1,2],[1.5,5],[2,3],[2.5,7],[3,6],[3.5,9],[4,8],[4.5,12],[5,10],[5.5,14],[6,13],[7,16],[7.5,15],[8,19],[9,18]],i,ticks=[0,2,4,6,8,10],X=function(v){return 60+v*29;},Y=function(v){return 190-v*7.5;};
+  b+=T('ts',50,14,'Sales growth (%)','start')+axes(60,190,360,35);
+  b+=ytick(60,Y(0),'0')+ytick(60,Y(10),'10')+ytick(60,Y(20),'20');
+  for(i=0;i<ticks.length;i++){b+=T('ts',X(ticks[i]),204,String(ticks[i]));}
+  b+='<line class="ln" x1="'+X(0)+'" y1="'+Y(1)+'" x2="'+X(10)+'" y2="'+Y(19)+'"/>';
+  for(i=0;i<p.length;i++){b+='<circle class="dt" cx="'+X(p[i][0])+'" cy="'+Y(p[i][1])+'" r="3.5"/>';}
+  b+=T('ts',210,222,'Marketing spend growth (%)');
+  b+=cap('Shows the link between two variables','Look for: dots rising together, which means a positive link.',252);
+  return chart('ch_scat','Scatterplot','Each dot is one business. As marketing spend growth goes up, sales growth goes up too. The line shows the upward trend.',b,290);
+}};
+
+DIAGRAMS.ch_bub={title:'Bubble chart',svg:function(){
+  var b='',p=[[15,70,8,CH.pur],[30,40,12,CH.pur],[45,85,16,CH.pur],[55,20,22,CH.pur],[60,55,26,CH.gray],[75,30,14,CH.gray],[85,75,20,CH.gray],[25,15,10,CH.gray]],i,X=function(v){return 60+v*2.9;},Y=function(v){return 190-v*1.5;};
+  b+=T('ts',50,14,'Profit margin (%)','start')+axes(60,190,360,35);
+  b+=ytick(60,Y(0),'0')+ytick(60,Y(50),'50')+ytick(60,Y(100),'100');
+  for(i=0;i<=100;i+=50){b+=T('ts',X(i),204,String(i));}
+  for(i=0;i<p.length;i++){b+='<g class="c '+p[i][3]+'"><circle cx="'+X(p[i][0])+'" cy="'+Y(p[i][1])+'" r="'+p[i][2]+'" fill="var(--f)" stroke="var(--s)" stroke-width="1.5"/></g>';}
+  b+=T('ts',210,222,'Market growth (%)');
+  b+=legend([[CH.pur,'Type 1',65],[CH.gray,'Type 2',65]],240,20)+T('ts',160,240,'Bigger bubble = more revenue','start');
+  b+=cap('A scatterplot with a third variable','Look for: position (two variables) and bubble size (the third).',266);
+  return chart('ch_bub','Bubble chart','A scatterplot where bubble size shows revenue. Each bubble sits at its market growth and profit margin.',b,305);
+}};
+
+DIAGRAMS.ch_wf={title:'Waterfall chart',svg:function(){
+  var b='',s=0.1,Y=function(v){return 200-v*s;},bars=[
+    ['Start','profit',0,800,'c-blue','800'],['Price','increase',800,950,'c-teal','+150'],['Volume','increase',950,1200,'c-teal','+250'],
+    ['Variable','cost cut',1200,1250,'c-teal','+50'],['Fixed','cost rise',1050,1250,'c-coral','-200'],['End','profit',0,1050,'c-blue','1,050']],i,x,lv=[800,950,1200,1250,1050];
+  b+=T('ts',40,14,'Profit ($K, thousands of dollars)','start')+axes(40,200,378,32);
+  b+=ytick(40,Y(0),'0')+ytick(40,Y(500),'500')+ytick(40,Y(1000),'1,000')+ytick(40,Y(1500),'1,500');
+  for(i=0;i<bars.length;i++){x=50+i*58;
+    b+=cr(bars[i][4],x,Y(bars[i][3]),40,(bars[i][3]-bars[i][2])*s)+T('th',x+20,Y(bars[i][3])-11,bars[i][5])+T('tx',x+20,214,bars[i][0])+T('tx',x+20,228,bars[i][1]);
+    if(i<5){b+='<line class="dash" x1="'+(x+40)+'" y1="'+Y(lv[i])+'" x2="'+(x+58)+'" y2="'+Y(lv[i])+'"/>';}}
+  b+=cap('Shows what drove the change between two points','Steps add or subtract: 800+150+250+50-200 = 1,050',262);
+  return chart('ch_wf','Waterfall chart','Profit starts at 800 thousand dollars. Price adds 150, volume adds 250, lower variable costs add 50, higher fixed costs subtract 200. End profit is 1,050 thousand dollars.',b,300);
+}};
+
+DIAGRAMS.ch_mek={title:'Marimekko (mekko) chart',svg:function(){
+  var b='',cl=[CH.gray,CH.pur,CH.teal],i,j,x=50,w,tot,y,h,p,all=16000,W=310,labs=['Product A','Product B','Product C'];
+  b+=T('ts',50,14,'% of sales','start')+T('ts',360,14,'Total = $16,000','end')+axes(50,200,360,50);
+  b+=ytick(50,200,'0')+ytick(50,150,'50%')+ytick(50,50,'100%');
+  for(i=0;i<3;i++){tot=SEG[i][0]+SEG[i][1]+SEG[i][2];w=tot/all*W;y=200;
+    for(j=0;j<3;j++){p=SEG[i][j]/tot;h=p*150;y-=h;b+=cr(cl[j],x,y,w,h);if(i===0){b+=T('ts',x+w/2,y+h/2,labs[j]);}if(i===1){b+=T('ts',x+w/2,y+h/2,Math.round(p*100)+'%');}}
+    b+=T('th',x+w/2,38,'$'+tot.toLocaleString('en-US'))+T('ts',x+w/2,216,GRP[i]);
+    x+=w;}
+  b+=segLegend(cl,238);
+  b+=cap('Part of a total across two things','Wider column = bigger region. Taller part = bigger share.',266);
+  return chart('ch_mek','Marimekko chart','Column width shows region size: Region 1 5,000, Region 2 8,000, Region 3 3,000 dollars, total 16,000. Height shows the share of products A, B and C.',b,305);
+}};
+/* ---- market sizing flows ---- */
+function chainD(id,title,desc,steps){
+  var b='',y=8,h=46,gap=18,i,c,n=steps.length;
+  for(i=0;i<n;i++){
+    c=steps[i][2]||(i===n-1?'teal':'purple');
+    b+=B(c,40,y,300,h,steps[i][0],steps[i][1]);
+    if(i<n-1){b+=P(id,'M190 '+(y+h+1)+' L190 '+(y+h+gap-2));}
+    y+=h+gap;
+  }
+  return SV(id,380,y-gap+8,title,desc,b);
+}
+DIAGRAMS.mk_td={title:'Two ways to size a market',svg:function(){
+  var b='';
+  b+='<g class="c c-purple"><rect x="15" y="10" width="170" height="190" rx="10"/><path d="M60 40 L140 40 L112 90 L112 110 L88 125 L88 90 Z" fill="none" stroke="var(--s)" stroke-width="2.5" stroke-linejoin="round"/>'+T('th',100,150,'Top-down')+T('ts',100,172,'Start big, break it down')+'</g>';
+  b+='<g class="c c-teal"><rect x="195" y="10" width="170" height="190" rx="10"/><rect x="225" y="75" width="34" height="34" rx="4" fill="none" stroke="var(--s)" stroke-width="2.5"/><rect x="263" y="75" width="34" height="34" rx="4" fill="none" stroke="var(--s)" stroke-width="2.5"/><rect x="244" y="37" width="34" height="34" rx="4" fill="none" stroke="var(--s)" stroke-width="2.5"/>'+T('th',280,150,'Bottom-up')+T('ts',280,172,'Start small, build it up')+'</g>';
+  return SV('mk_td',380,210,'Top-down and bottom-up','Top-down starts with a large number and breaks it down, like a funnel. Bottom-up starts with a small number and builds it up, like blocks.',b);
+}};
+DIAGRAMS.mk_q1={title:'Practice 1: toothbrush market (top-down)',svg:function(){return chainD('mk_q1','Toothbrush market flow','From 320 million people to a 4.32 billion dollar market, one step at a time.',[
+ ['U.S. population','320M'],['Brush their teeth','× 90% = 288M'],['Use regular brushes','× 75% = 216M'],['Brushes used a year','× 10 each = 2.16B'],['Market size','× $2 each = $4.32B']]);}};
+DIAGRAMS.mk_q2={title:'Practice 2: TV ads a day',svg:function(){return chainD('mk_q2','TV ads flow','From 2,000 channels to 1.44 million ads a day.',[
+ ['TV channels','2,000'],['Hours on air a day','× 24 = 48,000 hours'],['Hours of ads','× 25% = 12,000 hours'],['Minutes of ads','× 60 = 720,000 minutes'],['Ads a day','÷ 0.5 minute each = 1.44M']]);}};
+DIAGRAMS.mk_q3={title:'Practice 3: beer at an NBA game',svg:function(){return chainD('mk_q3','Beer flow','From 20,000 seats to 75,600 ounces of beer.',[
+ ['Seats','20,000'],['People there','× 70% = 14,000'],['Can legally drink','× 75% = 10,500'],['Buy beer','× 60% = 6,300'],['Beers sold','× 1 each = 6,300'],['Volume of beer','× 12 oz = 75,600 oz.']]);}};
+DIAGRAMS.mk_q4={title:'Practice 4: iPhones sold in the U.S.',svg:function(){return chainD('mk_q4','iPhone flow','Start with one Apple store, scale to all Apple stores, then add non-Apple stores and online.',[
+ ['Visits to one store a year','1,000 × 360 = 360,000'],['iPhones sold, one store','× 25% × 60% = 54,000'],['All Apple stores','× 300 stores = 16.2M'],['All stores','÷ 0.75 (Apple is 75%) = 21.6M','coral'],['All U.S. sales','÷ 0.6 (stores are 60%) = 36M']]);}};
+DIAGRAMS.mk_flow={title:'Top-down and bottom-up as flowcharts',svg:function(){
+  var id='mk_flow',b='',i,y,td=[['1. Start with a big number','U.S. population: 320M','purple'],['2. Narrow it down','× 90% brush teeth = 288M','purple'],['3. Narrow again','× 75% use regular brushes = 216M','purple'],['4. Apply the usage','× 10 a year = 2.16B brushes','purple'],['Answer','× $2 each = $4.32B','gray']],
+  bu=[['1. Start with one small unit','One coffee shop: 200 cups a day','teal'],['2. Build up over time','× 300 days = 60,000 cups a year','teal'],['3. Build up in number','× 50 shops = 3M cups','teal'],['Answer','× $4 a cup = $12M a year','gray']];
+  b+=T('th',170,16,'Top-down')+T('ts',170,34,'Start big, break it down')+T('th',510,16,'Bottom-up')+T('ts',510,34,'Start small, build it up');
+  for(i=0;i<td.length;i++){y=52+i*64;b+=B(td[i][2],20,y,300,46,td[i][0],td[i][1]);if(i<td.length-1){b+=P(id,'M170 '+(y+47)+' L170 '+(y+63));}}
+  for(i=0;i<bu.length;i++){y=52+i*64;b+=B(bu[i][2],360,y,300,46,bu[i][0],bu[i][1]);if(i<bu.length-1){b+=P(id,'M510 '+(y+47)+' L510 '+(y+63));}}
+  b+=T('ts',340,378,'Top-down: you know a big total (a population). Bottom-up: you can count one unit (one shop).')+T('ts',340,396,'Either way, say your steps out loud before you do any math.');
+  return SV(id,680,410,'Top-down and bottom-up flowcharts','Top-down starts with the U.S. population of 320 million and breaks it down to a 4.32 billion dollar toothbrush market. Bottom-up starts with one coffee shop selling 200 cups a day and builds up to a 12 million dollar market.',b);
+}};
+/* ---- framework approach 2 ---- */
+DIAGRAMS.fw5={title:'Framework approach #2: pick from 8 broad business areas',svg:function(){
+  var id='fw5',b='',L=[['Market','Size, growth, trends','purple'],['Competition','Rivals, share, advantages','purple'],['Company','Strengths, capabilities','purple'],['Customers','Who buys, what they need','purple']],
+  R=[['Profitability','Revenues, costs, margins','teal'],['Strategic alternatives','Options we could choose','teal'],['Risks & mitigations','What could go wrong, fixes','teal'],['Create your own','Add an area that fits this case','coral']],i,y;
+  b+=B('gray',140,10,400,50,'Memorize 8 broad business areas','Then pick the most relevant ones for the case');
+  b+=P(id,'M340 61 L340 79');
+  for(i=0;i<4;i++){y=82+i*66;
+    b+=B(L[i][2],30,y,290,52,L[i][0],L[i][1])+B(R[i][2],360,y,290,52,R[i][0],R[i][1]);}
+  b+=P(id,'M340 338 L340 366');
+  b+=B('gray',140,368,400,46,'Say your picks out loud','Example: Market, Competition, Company, Profitability');
+  return SV(id,680,426,'Eight broad business areas','Framework approach 2. Memorize eight broad business areas: Market, Competition, Company, Customers, Profitability, Strategic alternatives, Risks and mitigations, and Create your own. Then pick the most relevant ones for the case.',b);
+}};
+/* ---- profit decline case ---- */
+DIAGRAMS.dc_steps={title:'Profit decline: three steps',svg:function(){
+  var id='dc_steps',b='';
+  b+=B('purple',40,10,600,56,'1. Find WHAT is causing the decline','Profit = Revenues - Costs. Which one moved, and where inside it?');
+  b+=P(id,'M340 67 L340 93');
+  b+=B('teal',40,94,600,56,'2. Understand WHY it is happening','Check profitability, customers, competitors and the market.');
+  b+=P(id,'M340 151 L340 177');
+  b+=B('coral',40,178,600,56,'3. Brainstorm ideas and recommend','Give a few options, pick one, say why.');
+  return SV(id,680,246,'Three steps for a profit decline case','Step 1 find what is causing the decline. Step 2 understand why it is happening. Step 3 brainstorm ideas and develop a recommendation.',b);
+}};
+DIAGRAMS.dc_what={title:'Step 1: WHAT. Revenues fell, costs barely moved',svg:function(){
+  var id='dc_what',b='';
+  b+=B('gray',20,10,640,56,'Profit = Revenues - Costs','');
+  b+=B('coral',20,90,200,64,'Profit','down $100M');
+  b+=B('coral',240,90,200,64,'Revenues','down $80M');
+  b+=B('amber',460,90,200,64,'Costs','up $20M');
+  b+=T('ts',340,178,'Revenues are the main cause: $80M of the $100M fall (the other $20M is costs).');
+  b+=P(id,'M340 191 L340 211');
+  b+=T('th',340,226,'Now split revenues by product');
+  b+=B('teal',20,246,200,64,'Compact','up $20M');
+  b+=B('amber',240,246,200,64,'Mid-size','down $10M');
+  b+=B('coral',460,246,200,64,'Full-size','down $90M');
+  b+=T('ts',340,334,'+20 - 10 - 90 = -80. Full-size cars are the problem.');
+  return SV(id,680,350,'Find what is causing the decline','Profit fell 100 million dollars. Revenues fell 80 million and costs rose 20 million. Splitting revenues: compact up 20 million, mid-size down 10 million, full-size down 90 million. Full-size cars are the problem.',b);
+}};
+DIAGRAMS.dc_why={title:'Step 2: WHY. Four areas to check',svg:function(){
+  return fwTree('dc_why','Why is it happening','Four areas to check: profitability, customers, competitors and market, each with questions.','Full-size sales fell','why?',[
+    {c:'purple',t1:'Profitability',t2:'',items:['Revenues changed?','Costs changed?','Cause of decline?']},
+    {c:'teal',t1:'Customers',t2:'',items:['Needs changed?','Buying habits?','View us differently?']},
+    {c:'coral',t1:'Competitors',t2:'',items:['New competitors?','Recent moves?']},
+    {c:'pink',t1:'Market',t2:'',items:['New technologies?','New regulations?']}]);
+}};
+DIAGRAMS.dc_ideas={title:'Step 3: brainstorm ideas (price problem)',svg:function(){
+  var id='dc_ideas',b='';
+  b+=B('gray',140,10,400,50,'Finding','Competitors cut the price of full-size cars');
+  b+=P(id,'M340 61 L340 79');
+  b+=B('purple',20,82,200,56,'Decrease prices','match the competitors');
+  b+=B('teal',240,82,200,56,'Keep prices, add features','give more for the same price');
+  b+=B('coral',460,82,200,56,'Raise prices','target the premium segment');
+  b+=P(id,'M340 139 L340 163');
+  b+=B('amber',140,164,400,50,'Pick one and say why','Then add: other options...');
+  return SV(id,680,226,'Brainstorm ideas','Competitors cut prices on full-size cars. Ideas: decrease prices, keep prices and add car features, or raise prices and target the premium segment. Then pick one and explain why.',b);
+}};
+DIAGRAMS.dc_cost={title:'Cost version: costs rose $80M',svg:function(){
+  return fwTree('dc_cost','Cost version of the case','Costs rose 80 million dollars. Check suppliers, competitors and the car battery market to find why batteries cost more.','Costs up $80M','batteries, alloys, fixed?',[
+    {c:'purple',t1:'Suppliers',t2:'',items:['Raised prices?','Their costs up?']},
+    {c:'teal',t1:'Competitors',t2:'',items:['Their costs up too?']},
+    {c:'coral',t1:'Car battery market',t2:'',items:['Other demand up?','New regulations?']}],[92,297,502]);
+}};
+function tbl(head,rows){
+  var h='<div class="tw"><table><thead><tr>',i,j;
+  for(i=0;i<head.length;i++){h+='<th>'+head[i]+'</th>';}
+  h+='</tr></thead><tbody>';
+  for(i=0;i<rows.length;i++){h+='<tr>';for(j=0;j<rows[i].length;j++){h+='<td>'+rows[i][j]+'</td>';}h+='</tr>';}
+  return h+'</tbody></table></div>';
+}
+function say(t){return '<div class="say"><b>Say it out loud:</b> '+t+'</div>';}
+
+var SECTIONS=[];
+
+SECTIONS.push({id:'tools',group:'1. Pick the approach',title:'Which tool for which case',desc:'Profit tree, BCG matrix, 3Cs and payback',
+concept:'<p>Four tools cover most cases. Look at what the case is about, then pick one.</p>'+
+tbl(['If the case is about...','Use','Key question'],[
+ ['Falling profit','Profit tree','Which branch moved: price, volume, fixed or variable cost?'],
+ ['Many products','BCG matrix','Which products earn cash, and which need money or an exit?'],
+ ['A new market or product','3Cs','Can we do it, do customers want it, who else is there?'],
+ ['A spend decision','Payback','How many years until the money comes back?']])+
+'<h3>How each tool works</h3><ul>'+
+'<li>Profit tree: profit = revenue − cost. Split revenue into price × volume and cost into fixed and variable. Find the branch that moved.</li>'+
+'<li>BCG matrix: rate each product on market growth and your share. Invest in Stars, milk Cash cows, test Question marks, fix or sell Dogs. Use it only when there are several products and limited money.</li>'+
+'<li>3Cs: company, customers, competitors. You need a yes on all three.</li>'+
+'<li>Payback: cost ÷ yearly profit. Shorter is better.</li></ul>',
+example:'<p>Amusement park numbers, kept simple.</p><ul>'+
+'<li>Profit tree: revenue $150M, cost $100M, so profit is $50M. Revenue is $50 × 3M visitors.</li>'+
+'<li>BCG matrix: food stands earn steady cash in a slow market (Cash cow). Premium passes are new and growing but small (Question mark).</li>'+
+'<li>Payback: a lease costs $10M and earns $1M a year, so 10 years. A pricing change costs $2M and earns $1M a year, so 2 years. Do the pricing change first.</li></ul>'+
+say('Profit is revenue minus cost, so I will split it into price, volume and cost and find the branch that moved.'),
+practice:[
+ ['Profit fell 20%. Which tool, and what is your first step?','Profit tree. Split profit into revenue and cost, then split each side.'],
+ ['A retailer has five product lines and limited cash. Which tool?','BCG matrix. Place each line by market growth and share, then decide where to invest.'],
+ ['A food truck wants to enter a new town. Which tool?','3Cs. Can we do it, do customers want it, who else is there?'],
+ ['A $6M project earns $2M a year. What is the payback?','$6M ÷ $2M = 3 years.']],
+pics:['bcg','tree','threec','payback'],cards:null});
+
+SECTIONS.push({id:'frameworks',group:'1. Pick the approach',title:'Pick the right framework',desc:'Market entry, acquisition, diagnosis, competitive threat',
+concept:'<p>Four practice questions gave four frameworks. Match the case to one, then say its boxes out loud before you calculate.</p>'+
+tbl(['If the case is about...','Use','The boxes'],[
+ ['Entering a new market or product (Q1)','Market entry','Market attractiveness, competitive landscape, our capabilities, profitability'],
+ ['Buying a company (Q4)','Acquisition','Market attractiveness, competitive landscape, target company attractiveness, financial considerations'],
+ ['Profit or sales fell (Q2)','Diagnosis','Numbers first (quantitative), then customers, competitors, market (qualitative)'],
+ ['A competitor is moving in (Q3)','Competitive threat','Threat size, customer response, competitor response, our options'],
+ ['No framework fits (Framework approach #2)','Memorized list of business areas','Market, Competition, Company, Customers, Profitability, Strategic alternatives, Risks & mitigations, Create your own']])+
+'<p>Framework approach #2: memorize a list of 8 to 10 broad business areas, then pick the most relevant ones for the case. The last box, Create your own, is a reminder to add an area that fits this case.</p>'+
+'<p>Questions 1 and 4 follow almost the same pattern: market, then competition, then the company, then the numbers. That is one structure for two case types.</p>',
+example:'<p>An acquisition case: a firm wants to buy a roofing tile distributor.</p><ul>'+
+'<li>Market: how big, how fast growing, what margins?</li>'+
+'<li>Competition: how many rivals, how much share, what advantages?</li>'+
+'<li>Target company: is it profitable, how much share, any differentiation?</li>'+
+'<li>Financials: is the price fair, how much can we improve it, what are the expected returns?</li></ul>'+
+say('I would look at four areas: how attractive the market is, who the competitors are, whether this company can win, and whether the numbers work.'),
+practice:[
+ ['A snack company wants to sell in a new country. Which framework?','Market entry: market, competition, our capabilities, profitability.'],
+ ['A firm wants to buy a competitor. Which framework?','Acquisition: market, competition, target company, financial considerations.'],
+ ['A restaurant chain saw profit fall 15% in a year. Which framework?','Diagnosis: check revenue and costs first, then customers, competitors and the market.'],
+ ['A big rival opens next door. Which framework?','Competitive threat: threat size, customer response, competitor response, our options.']],
+pics:['fw5','fw1','fw2','fw3','fw4'],
+cards:{
+"Pick a framework":[
+["A company wants to launch a new product in a new market, like organic pineapple. Which framework?","Market entry: market attractiveness, competitive landscape, our capabilities, profitability."],
+["A firm wants to buy a company, like a roofing tile distributor. Which framework?","Acquisition: market attractiveness, competitive landscape, target company attractiveness, financial considerations."],
+["Profit or sales have fallen. Which framework?","Diagnosis: quantitative (profit drivers) first, then qualitative (customers, competitors, market)."],
+["A new competitor opens nearby, like a casino. Which framework?","Competitive threat: threat size, customer response, competitor response, our strategic options."],
+["What should you do before any calculation?","Say your framework out loud first, then ask for the numbers you need."],
+["Framework approach #2: what is it?","Memorize a list of 8 to 10 broad business areas and pick the most relevant ones for the case."],
+["Name the eight business areas in approach #2.","Market, Competition, Company, Customers, Profitability, Strategic alternatives, Risks & mitigations, Create your own."]],
+"Market entry":[
+["What are the four boxes of the market entry framework?","Market attractiveness, competitive landscape, our capabilities, profitability."],
+["Market attractiveness: what do you ask?","What is the market size? What is the growth rate? What are average profit margins?"],
+["Capabilities: what do you ask?","Do we have the expertise to grow it? Do we have the distribution channels to sell it?"],
+["Profitability: what do you ask?","What are the expected revenues? What are the expected costs? How long to break even?"]],
+"Acquisition":[
+["What are the four boxes of the acquisition framework?","Market attractiveness, competitive landscape, target company attractiveness, financial considerations."],
+["Target company attractiveness: what do you ask?","Is it profitable? How much market share does it have? Does it have differentiation or competitive advantages?"],
+["Financial considerations: what do you ask?","Is the price fair and reasonable? How much can the client improve and grow the company? What are the expected returns?"],
+["Which math belongs in the financial box?","ROI and payback. Example: buy for $100M, sell for $130M. ROI = $30M ÷ $100M = 30%."]],
+"Diagnosis":[
+["What does the quantitative branch check?","Profit drivers: a decline in revenue (quantity, price)? An increase in costs (variable, fixed)?"],
+["What are the three qualitative branches?","Customer needs and preferences, competitors, and the market."],
+["Customer questions?","Have needs changed? Have purchasing habits changed? Do customers view our company differently?"],
+["Competitor and market questions?","Have new players entered? Have rivals made strategic moves? Are rivals declining? Any new technologies or regulations in the market?"]],
+"Competitive threat":[
+["What are the four boxes of the competitive threat framework?","New casino threat size, customer response, competitor response, our strategic options."],
+["Threat size: what do you ask?","How large is it? How close is it to ours? Does it have differentiation or competitive advantages?"],
+["What do you ask about customer and competitor responses?","Customers: how will they react, and how likely are ours to switch? Competitors: will they open, close or improve casinos?"],
+["What strategic options do you list?","Do nothing, open a new casino, close casinos, or improve existing casinos."]]
+}});
+
+SECTIONS.push({id:'profit',group:'2. Question types',title:'Profit and breakeven',desc:'Pizza store example',
+concept:'<p>Profit is what is left after costs. Breakeven is when profit is exactly zero.</p><ul>'+
+'<li>Revenue = Quantity × Price</li>'+
+'<li>Costs = Total variable costs + Total fixed costs</li>'+
+'<li>Total variable costs = Quantity × variable cost per unit</li>'+
+'<li>Profit = Revenue − Costs</li></ul>'+
+'<p>Variable costs change with how much you make (ingredients). Fixed costs stay the same (rent, salaries). Combine all four:</p>'+
+'<div class="say"><b>Profit = (Price − Variable cost) × Quantity − Fixed costs</b></div>'+
+'<h3>Breakeven in 3 steps</h3><ol><li>Write the profit equation.</li><li>Set profit to $0.</li><li>Solve for Q, the quantity.</li></ol>'+
+'<p>Why it works: each unit leaves some money after its own cost (price − variable cost). That money pays off the fixed costs. Breakeven is how many units it takes to pay them off completely.</p>',
+example:'<p>A pizza store sells 100,000 pizzas a year at $10 each. Each pizza costs $4 to make. Rent is $150K and 2 employees earn $75K each.</p>'+
+tbl(['Step','Math','Result'],[
+ ['Revenue','100,000 × $10','$1M'],
+ ['Variable costs','100,000 × $4','$400K'],
+ ['Fixed costs','$150K + 2 × $75K','$300K'],
+ ['Total costs','$400K + $300K','$700K'],
+ ['Profit','$1M − $700K','$300K'],
+ ['Breakeven setup','$0 = ($10 − $4) × Q − $300K','6Q = $300K'],
+ ['Breakeven','$300K ÷ 6','50,000 pizzas']])+
+'<p>Check: at 50,000 pizzas, revenue is $500K and costs are $200K + $300K = $500K, so profit is $0.</p>'+
+say('Breakeven means profit is zero. Each pizza earns $6 after its own cost, and I need to cover $300K of fixed costs, so I need 50,000 pizzas.'),
+practice:[
+ ['The store sells 70,000 pizzas. What is the profit?','($10 − $4) × 70,000 − $300K = $420K − $300K = $120K.'],
+ ['The price rises to $12. What is the new breakeven?','Each pizza leaves $8. $300K ÷ 8 = 37,500 pizzas.'],
+ ['Ingredients rise so each pizza costs $5. New breakeven?','Each pizza leaves $5. $300K ÷ 5 = 60,000 pizzas.'],
+ ['Rent rises from $150K to $180K. New breakeven?','Fixed costs are $330K. $330K ÷ 6 = 55,000 pizzas.'],
+ ['Price is $12 and the store sells 100,000. Profit?','($12 − $4) × 100,000 − $300K = $800K − $300K = $500K.']],
+pics:['pizza','breakeven'],
+cards:{
+"Formulas":[
+["What is revenue, and what is its formula?","The income a business generates from its operations. Revenue = Quantity × Price."],
+["What are costs, and what is their formula?","The expenses of running the business. Costs = Total variable costs + Total fixed costs."],
+["What is profit?","The earnings a business keeps after paying all its expenses. Profit = Revenue − Costs."],
+["Variable versus fixed costs?","Variable costs change with quantity (ingredients). Fixed costs stay the same (rent, salaries)."],
+["How do you get total variable costs?","Quantity × variable cost per unit."],
+["Combine all four formulas into one line","Profit = (Price − Variable cost) × Quantity − Fixed costs."]],
+"Pizza walk-through":[
+["Pizza store: 100,000 pizzas at $10. Revenue?","100,000 × $10 = $1M."],
+["Each pizza costs $4 to make. Total variable costs?","100,000 × $4 = $400K."],
+["Rent is $150K and 2 employees earn $75K each. Fixed costs?","$150K + (2 × $75K) = $300K."],
+["Total costs and profit?","Costs = $400K + $300K = $700K. Profit = $1M − $700K = $300K."],
+["Check the profit with the one-line formula","($10 − $4) × 100,000 − $300K = $600K − $300K = $300K. It matches."],
+["What does one pizza earn after its own cost?","$10 − $4 = $6. That goes toward the fixed costs."],
+["The store sells 70,000 pizzas. Profit?","$6 × 70,000 − $300K = $420K − $300K = $120K."],
+["Price is $12 and it sells 100,000. Profit?","$8 × 100,000 − $300K = $500K."]],
+"Breakeven":[
+["What is breakeven?","Selling enough to exactly recoup all costs. Profit is zero."],
+["How do you solve a breakeven question?","Set profit equal to zero and solve for the unknown, usually quantity (Q)."],
+["Set up the pizza breakeven equation","$0 = ($10 − $4) × Q − $300K"],
+["Solve it for Q","6Q = $300K, so Q = 50,000 pizzas."],
+["Check: revenue, costs and profit at 50,000 pizzas?","Revenue $500K. Costs $200K variable + $300K fixed = $500K. Profit $0."],
+["Shortcut formula for breakeven quantity?","Fixed costs ÷ (Price − variable cost) = $300K ÷ $6 = 50,000."],
+["Twist: the price rises to $12. New breakeven?","$0 = ($12 − $4) × Q − $300K, so 8Q = $300K and Q = 37,500 pizzas."],
+["What happens to breakeven when price or costs rise?","A higher price lowers it ($12 gives 37,500). Higher costs raise it (variable $5 gives 60,000, rent $180K gives 55,000)."]]
+}});
+
+SECTIONS.push({id:'invest',group:'2. Question types',title:'Investment: ROI and payback',desc:'Startup and roofing tile examples',
+concept:'<p>Investing means using cash today in the hope of making more later. Examples: marketing to generate sales, building a new product, infrastructure that cuts long-term costs, acquiring a company, or a private equity firm buying a company to resell.</p>'+
+'<div class="say"><b>ROI = Profit ÷ Investment cost</b><br><b>Payback period = Investment cost ÷ Profit per year</b></div>'+
+'<ul><li>ROI asks: how much do I earn for each dollar I put in?</li><li>Payback asks: how many years until I get my money back?</li></ul>'+
+'<p>Always ask: is the profit per year or a total? Payback uses profit per year. In the roofing tile example below, the profit is the total gain over the whole holding period.</p>'+
+'<p>For a steady yearly profit, yearly ROI = 1 ÷ payback. A 5-year payback is a 20% yearly return.</p>',
+example:'<h3>Payback: a machine learning startup</h3><p>A software company buys a startup for $20M. It should add $4M of profit a year.</p><ul><li>Payback = $20M ÷ $4M = 5 years</li><li>Yearly ROI = $4M ÷ $20M = 20% a year</li></ul>'+
+say('The acquisition costs $20M and adds $4M of profit a year, so it pays itself back in 5 years.')+
+'<h3>ROI: a roofing tile distributor</h3><p>A private equity firm buys a distributor for $100M and sells it later for $130M.</p><ul><li>Profit = $130M − $100M = $30M</li><li>ROI = $30M ÷ $100M = 30%</li></ul>'+
+say('They paid $100M and sold for $130M, so the profit is $30M. That is 30 cents back for every dollar invested, a 30% return.'),
+practice:[
+ ['The startup adds $5M a year instead of $4M. Payback and yearly ROI?','$20M ÷ $5M = 4 years. Yearly ROI = $5M ÷ $20M = 25%.'],
+ ['The price is $30M and it adds $4M a year. Payback?','$30M ÷ $4M = 7.5 years.'],
+ ['Building in-house costs $8M and adds $2M a year. Which pays back faster, in-house or the $20M acquisition adding $4M a year?','In-house: 4 years. Acquisition: 5 years. In-house is faster, but the acquisition earns more per year, so budget and risk also matter.'],
+ ['The roofing tile firm sells for $150M. ROI?','$50M ÷ $100M = 50%.'],
+ ['It sells for $90M. ROI?','Profit = −$10M, so ROI = −10%. That is a loss.'],
+ ['The firm wants a 50% ROI on $100M. What sale price does it need?','Profit needed = $50M, so it must sell for $150M.']],
+pics:['roi'],
+cards:{
+"Payback and ROI":[
+["What is investing?","Using cash today in the hope of creating wealth in the future."],
+["Name some examples of investments","Marketing to generate sales. Building a new product. Infrastructure to cut long-term costs. Acquiring a company to grow revenue. A private equity firm buying a company to resell later."],
+["ROI formula?","Return on investment = Profit ÷ Investment cost."],
+["Payback period formula?","Payback period = Investment cost ÷ Profit per year."],
+["A startup costs $20M and adds $4M of profit a year. Payback period?","$20M ÷ $4M = 5 years."],
+["Same startup: what is the yearly ROI?","$4M ÷ $20M = 20% a year."],
+["How are payback and yearly ROI linked?","Yearly ROI = 1 ÷ payback. A 5-year payback is a 20% yearly return."],
+["The price is $30M and it adds $4M a year. Payback?","$30M ÷ $4M = 7.5 years."],
+["It costs $20M but adds $5M a year. Payback and yearly ROI?","$20M ÷ $5M = 4 years. Yearly ROI = $5M ÷ $20M = 25%."],
+["Build in-house for $8M adding $2M a year, or buy for $20M adding $4M a year. Which pays back faster?","In-house: 4 years. Acquisition: 5 years. But the acquisition earns more per year, so budget and risk also matter."],
+["What should you ask about the profit number?","Is it profit per year or total profit? The answer changes the formula you use."]],
+"ROI example":[
+["A private equity firm buys a roofing tile distributor for $100M and sells it for $130M. Profit?","$130M − $100M = $30M."],
+["Same deal: what is the ROI?","Profit ÷ Investment cost = $30M ÷ $100M = 30%."],
+["Is ROI a yearly number or a total?","It depends on the profit you use. Here the profit is the total gain over the whole holding period, so 30% is a total return."],
+["It sells for $150M instead. ROI?","$50M ÷ $100M = 50%."],
+["It sells for $90M. ROI?","Profit = −$10M, so ROI = −10%. That is a loss."],
+["The firm wants a 50% ROI on $100M. What sale price does it need?","Profit needed = $50M, so it must sell for $150M."]]
+}});
+
+SECTIONS.push({id:'ops',group:'2. Question types',title:'Operations',desc:'Capacity, output, bottlenecks',starter:true,
+concept:'<div class="note">Starter section. I wrote these cards myself. They will be replaced when you share the video examples for operations.</div>'+
+'<p>Operations questions ask how much a process can make.</p><ul>'+
+'<li>Output = rate × time</li><li>Capacity utilization = actual ÷ maximum</li><li>In a process with several steps, the slowest step (the bottleneck) sets the pace.</li></ul>',
+example:'<p>A machine makes 50 units an hour, 8 hours a day, 5 days a week.</p><ul><li>Weekly output = 50 × 8 × 5 = 2,000 units</li></ul>'+
+say('The machine makes 50 an hour, so in an 8-hour day that is 400, and over 5 days it is 2,000.'),
+practice:[
+ ['A park gets 10,000 visitors a day and its capacity is 40,000. Utilization?','10,000 ÷ 40,000 = 25%.'],
+ ['You need 1,000 units and a machine makes 100 an hour. Hours needed?','1,000 ÷ 100 = 10 hours.']],
+pics:[],
+cards:{"Operations":[
+["Capacity utilization? 10,000 visitors a day, capacity 40,000.","Actual ÷ maximum = 25%."],
+["50 units an hour, 8 hours a day, 5 days a week. Weekly output?","Rate × time: 50 × 8 × 5 = 2,000 units."],
+["You need 1,000 units and a machine makes 100 an hour. Hours needed?","1,000 ÷ 100 = 10 hours."],
+["Three steps make 60, 40 and 80 units an hour. What is the line's output?","40 an hour. The slowest step (the bottleneck) sets the pace."]]}});
+
+SECTIONS.push({id:'charts',group:'2. Question types',title:'Charts and graphs',desc:'Ten chart types, read them, say what they mean',starter:false,
+concept:'<div class="note">The ten chart types come from your video. The pictures use made-up, generic numbers (products and regions), so you can swap in any case. The reading steps, practice and "Look for" tips are my own wording.</div>'+
+'<p>There are ten chart types to know. Open the pictures below, one per type. Then, when you see a chart:</p><ol><li>Read the title, axes and units.</li><li>Find the pattern.</li><li>Calculate any change. Divide a percent change by the starting number.</li><li>Say what it means for the case.</li></ol>',
+example:'<p>A bar rises from 40 to 50.</p><ul><li>Change = 10. Percent change = 10 ÷ 40 = 25%.</li></ul>'+
+say('The bar rose from 40 to 50, a 25% increase, which tells me demand is growing.'),
+practice:[
+ ['A chart shows a 20% share of a $200M market. Revenue?','0.2 × $200M = $40M.'],
+ ['Share goes from 20% to 25%. How do you describe it?','+5 percentage points, which is a 25% increase (5 ÷ 20).']],
+pics:['ch_bar','ch_stack','ch_pct','ch_pie','ch_line','ch_hist','ch_scat','ch_bub','ch_wf','ch_mek'],
+cards:{"Ten chart types":[
+["Simple bar chart: what does it do?","Compares a single variable."],
+["Stacked bar chart: what does it do?","Compares a single variable and shows the parts that make up each bar."],
+["100% stacked bar chart: what does it do?","Shows the percentage each part makes up in a bar, so you can compare percentages across bars."],
+["Pie chart: what does it do?","Shows the percentage each part makes up of one total."],
+["Line graph: what does it do?","Shows how a variable changes over time."],
+["Histogram: what does it do?","Shows frequency distributions: how many fall in each range."],
+["Scatterplot: what does it do?","Shows the relationship between two variables."],
+["Bubble chart: what does it do?","A more complex scatterplot. It shows the relationship among many variables, using bubble size for a third."],
+["Waterfall chart: what does it do?","Shows the drivers of change between two comparison points."],
+["Marimekko (mekko) chart: what does it do?","A more complex pie chart. It shows the percentage each part makes up of a total across two dimensions."],
+["Which chart shows revenue over five years?","A line graph."],
+["Which chart explains why profit changed between two years?","A waterfall chart."]],
+"Charts and graphs":[
+["What are the steps when you see a chart?","Read the title, axes and units. Find the pattern. Then say what it means for the case."],
+["A bar rises from 40 to 50. Percent increase?","10 ÷ 40 = 25% (divide by the starting number)."],
+["A chart shows a 20% share of a $200M market. Revenue?","0.2 × $200M = $40M."],
+["Share goes from 20% to 25%. How do you describe it?","+5 percentage points, which is a 25% increase (5 ÷ 20)."]]}});
+SECTIONS.push({id:'decline',group:'2. Question types',title:'Profit decline case',desc:'What, why, then ideas. Car maker example',
+concept:'<p>A profit decline case asks: why did profit fall, and what should we do? Work in three steps and say them out loud first.</p><ol>'+
+'<li><b>WHAT</b> is causing the decline? Profit = Revenues - Costs. Find which one moved, then keep splitting it (by product, region, customer) until you find the exact spot.</li>'+
+'<li><b>WHY</b> is it happening? Check four areas: profitability, customers, competitors and the market.</li>'+
+'<li><b>Brainstorm</b> ideas and make a recommendation.</li></ol>'+
+tbl(['Area','Questions to ask'],[
+ ['Profitability','How have revenues changed? How have costs changed? What is causing the decline in profits?'],
+ ['Customers','Have customer needs changed? Have they changed their purchasing habits? Do they view the company differently?'],
+ ['Competitors','Have new competitors entered the market? Have existing competitors made recent moves?'],
+ ['Market','Are there new technologies? Are there new regulations?']])+
+'<p>If the problem is a cost, the areas change a little: suppliers, competitors and the market for that cost (here, the electric car market). Ask whether suppliers raised prices or their own costs, whether competitors also see higher costs, whether demand for the item rose elsewhere, and whether new regulations changed supply.</p>',
+example:'<p>A car maker\'s profit fell $100M. Revenues fell $80M and costs rose $20M.</p><ul>'+
+'<li>Step 1, WHAT: revenues are the main cause ($80M of the $100M).</li>'+
+'<li>Split revenues by car size: Compact up $20M, Mid-size down $10M, Full-size down $90M. That is +20 - 10 - 90 = -$80M. Full-size cars are the problem.</li>'+
+'<li>Step 2, WHY: competitors decreased the price of their full-size cars.</li>'+
+'<li>Step 3, ideas: decrease prices; keep prices but add car features; increase prices and target the premium segment.</li></ul>'+
+say('Profit fell $100M. Revenues drove $80M of that. Inside revenues, full-size cars fell $90M while compact grew $20M. So the problem is full-size cars. Next I want to understand why: customers, competitors and the market.')+
+'<p>Cost version of the same case: costs rose $80M. Check car batteries, alloys and fixed costs. Batteries are the answer. Why: the supplier\'s cost to produce batteries rose. Ideas: negotiate a lower price; switch to another supplier; use a different type of battery.</p>',
+practice:[
+ ['Profit fell $100M. Revenues fell $100M and costs were flat. What kind of problem is it?','A revenue problem, not a cost problem. Next, split revenues (by product, region or customer) to find where.'],
+ ['Revenues fell $80M and costs rose $20M. How much did profit fall?','80 + 20 = $100M.'],
+ ['Compact up $20M, mid-size down $10M, full-size down $90M. Net revenue change? Which is the problem?','+20 - 10 - 90 = -$80M. Full-size cars are the problem.'],
+ ['Costs rose $80M. Name three costs to check.','Cost of car batteries, cost of alloys, fixed costs (then other possibilities).'],
+ ['Full-size sales fell because competitors cut their prices. Give three ideas.','Decrease prices; keep prices the same but add car features; increase prices and target the premium segment.'],
+ ['What are the three steps in order?','1. Find WHAT is causing the decline. 2. Understand WHY it is happening. 3. Brainstorm ideas and recommend.']],
+pics:['dc_steps','dc_what','dc_why','dc_ideas','dc_cost'],
+cards:{"Profit decline case":[
+["What are the three steps of a profit decline case?","1. WHAT is causing the decline. 2. WHY it is happening. 3. Brainstorm ideas and recommend."],
+["Step 1 formula?","Profit = Revenues - Costs. Find which one moved."],
+["Profit down $100M. Revenues down $80M, costs up $20M. Main cause?","Revenues ($80M of the $100M)."],
+["Profit down $100M. Revenues down $100M, costs flat. Main cause?","Revenues. It is a revenue problem, not a cost problem."],
+["Compact +$20M, mid-size -$10M, full-size -$90M. Net?","-$80M. Full-size is the problem."],
+["Name the four areas to check in step 2.","Profitability, customers, competitors, market."],
+["Customers area: what do you ask?","Have needs changed? Have purchasing habits changed? Do they view the company differently?"],
+["Competitors area: what do you ask?","Have new competitors entered? Have existing competitors made recent moves?"],
+["Market area: what do you ask?","Are there new technologies? Are there new regulations?"],
+["Why did full-size sales fall in the example?","Competitors decreased the price of their full-size cars."],
+["Three ideas for a price problem?","Decrease prices; keep prices and add features; increase prices and target the premium segment."],
+["Costs up $80M. Which costs do you check?","Car batteries, alloys, fixed costs, other possibilities."],
+["Cost version: which areas do you check for why?","Suppliers, competitors, the electric car market."],
+["Suppliers: what two questions?","Have suppliers increased their prices? Have supplier costs increased?"],
+["Three ideas for a battery cost problem?","Negotiate a lower price; switch to another supplier; use a different type of battery."]]}});
+/* move after 'profit' */
+(function(){var a=SECTIONS.pop(),i,p=0;for(i=0;i<SECTIONS.length;i++){if(SECTIONS[i].id==='profit'){p=i+1;}}SECTIONS.splice(p,0,a);})();
+SECTIONS.push({id:'market',group:'2. Question types',title:'Market sizing',desc:'Top-down, bottom-up, tire example, rule of 72',
+concept:'<p>Market size is the total sales of a product or service in one year in a given region. It can also be the number of units sold in a year, or the number of customers who would buy.</p><ul>'+
+'<li>Top-down: start with a large number, then refine and break it down until you reach the answer.</li>'+
+'<li>Bottom-up: start with a small number, then build up until you reach the answer.</li></ul>'+
+'<h3>Two habits</h3><ul><li>Develop a structure before doing any math. Say your steps first.</li><li>Round numbers when appropriate. Use 320 million instead of 319 million. It keeps the math easy and reduces mistakes.</li></ul>'+
+'<h3>Trick: when the known part is a percent of the total</h3><p>If a part is 25% of the total, the part you already know is 75%. Divide by 0.75 to get the total. If stores are 60% of all sales, divide by 0.6. (My wording.)</p><h3>Rule of 72</h3><p>A shortcut for how long a market, company or investment takes to double: divide 72 by the annual growth rate (in %).</p><ul><li>9% growth: 72 ÷ 9 = about 8 years</li><li>12% growth: 72 ÷ 12 = about 6 years</li></ul>',
+example:'<p>Top-down: what is the yearly market for tires for personal vehicles in the US? The steps follow the video. The numbers are my assumptions, so state them out loud and invite correction.</p>'+
+tbl(['Step','Math','Result'],[
+ ['US population','Start here (rounded)','320M'],
+ ['Households','320M ÷ 2.5 people each','128M'],
+ ['Households with cars','80% of 128M, rounded','100M'],
+ ['Cars','100M × 2 cars each','200M'],
+ ['Tires on the road','200M × 4 wheels','800M'],
+ ['Tires bought a year','800M ÷ 4 years per tire','200M'],
+ ['Market size','200M × $100 per tire','$20B a year']])+
+say('I will start with the US population, get to households, then cars, then tires, then multiply by how often tires are replaced and what they cost. That gives about $20 billion a year.')+
+'<p>Bottom-up example (mine): one coffee shop sells 200 cups a day for 300 days = 60,000 cups. With 50 shops that is 3M cups. At $4 each, the market is $12M.</p>',
+practice:[
+ ['Practice 1: Market size of regular (non-electric) toothbrushes in the U.S.?','Steps: population, % who brush, % who use regular brushes, brushes a year, cost. 320M × 90% = 288M. × 75% = 216M. × 10 = 2.16B brushes. × $2 = $4.32B.'],
+ ['Practice 2: How many TV ads are shown in the U.S. each day?','Steps: channels, hours on air, % ads, ad length. 2,000 × 24 = 48,000 hours. × 25% = 12,000 hours of ads. × 60 = 720,000 minutes. ÷ 0.5 minute = 1.44M ads.'],
+ ['Practice 3: Volume of beer (in oz.) sold at the average NBA game?','Steps: seats, % filled, % allowed to drink, % who buy, beers each, ounces per beer. 20,000 × 70% = 14,000. × 75% = 10,500. × 60% = 6,300. × 1 beer = 6,300. × 12 oz = 75,600 oz.'],
+ ['Practice 4: How many iPhones does Apple sell in the U.S. each year?','Start with one Apple store: 1,000 × 360 = 360,000 visits. × 25% × 60% = 54,000. × 300 stores = 16.2M. Non-Apple stores are 25% of store sales: ÷ 0.75 = 21.6M. Online is 40% of all sales: ÷ 0.6 = 36M iPhones.'],
+ ['A city of 1M people. 50% buy one $4 coffee a day. Yearly market? (Use 360 days.)','1M × 50% = 500K cups a day × $4 = $2M a day × 360 = $720M.'],
+ ['Tires are replaced every 5 years instead of 4. New yearly market?','800M ÷ 5 = 160M tires × $100 = $16B.'],
+ ['A market grows 6% a year. How long to double?','72 ÷ 6 = 12 years.'],
+ ['A market doubles in 4 years. About what yearly growth?','72 ÷ 4 = about 18% a year.']],
+pics:['mk_td','mk_flow','mk_q1','mk_q2','mk_q3','mk_q4'],
+cards:{
+"Practice cases":[
+["Practice 1: toothbrush market. Answer?","$4.32B (320M × 90% × 75% × 10 brushes × $2)."],
+["Practice 1: after 288M people brush, what is the next step?","× 75% who use regular toothbrushes = 216M people."],
+["Practice 2: TV ads a day. Answer?","1.44M ads (2,000 channels × 24 h × 25% ads, then ÷ 0.5 minute per ad)."],
+["Practice 2: 12,000 hours of ads. How many minutes?","12,000 × 60 = 720,000 minutes."],
+["Practice 3: beer at an NBA game. Answer?","75,600 oz. (20,000 seats × 70% × 75% × 60% × 1 beer × 12 oz)."],
+["Practice 3: 20,000 seats, 70% full. People there?","14,000."],
+["Practice 4: iPhones in the U.S. Answer?","36M iPhones."],
+["Practice 4: where do you start?","With a single Apple store: visits a day, then visits a year."],
+["Practice 4: 54,000 per store × 300 stores?","16.2M iPhones sold in Apple stores."],
+["Practice 4: non-Apple stores are 25% of store sales. How do you get all store sales?","Apple stores are 75%, so 16.2M ÷ 0.75 = 21.6M."],
+["Practice 4: online is 40% of all sales. How do you get the total?","Stores are 60%, so 21.6M ÷ 0.6 = 36M."],
+["Estimation questions: what is the first thing to do?","Say your steps before doing any math, then round numbers to keep it easy."]],
+"Market sizing":[
+["What is market size?","The total sales of a product or service in one year in a given geography or region. It can also be the units sold in a year, or the total number of customers who would buy."],
+["What is the top-down approach?","Start with a large number, then refine and break it down until you reach the answer."],
+["What is the bottom-up approach?","Start with a small number, then build up and increase it until you reach the answer."],
+["Bottom-up: one shop sells 200 cups a day for 300 days. 50 shops, $4 a cup. Market?","60,000 cups × 50 shops = 3M cups. 3M × $4 = $12M."]],
+"Tire example":[
+["Tire market for personal vehicles in the US. First top-down step?","Start with the US population (about 320M)."],
+["People per household: assume 2.5. Households?","320M ÷ 2.5 = 128M households."],
+["80% of households own cars. How many?","128M × 80% = about 102M, rounded to 100M."],
+["Average 2 cars per household. How many cars?","100M × 2 = 200M cars."],
+["Multiply by four wheels. Tires on the road?","200M × 4 = 800M tires."],
+["Tires replaced every 4 years. Tires bought per year?","800M ÷ 4 = 200M tires a year."],
+["Multiply by $100 per tire. Yearly market?","200M × $100 = $20B a year. (The numbers are example assumptions to state out loud.)"],
+["Tires are replaced every 5 years instead. New market?","800M ÷ 5 = 160M tires × $100 = $16B."]],
+"Rule of 72":[
+["What is the rule of 72?","Years to double ≈ 72 ÷ the annual growth rate (in %)."],
+["An investment grows 9% a year. Years to double?","72 ÷ 9 = about 8 years."],
+["A market grows 12% a year. Years to double?","72 ÷ 12 = about 6 years."],
+["A market grows 6% a year. Years to double?","72 ÷ 6 = 12 years."],
+["A market doubles in 4 years. About what yearly growth?","72 ÷ 4 = about 18% a year."]],
+"Structure and rounding":[
+["What should you do before any math calculations?","Develop an approach or structure first, and say it out loud."],
+["When should you round numbers?","When appropriate: it keeps the math easy and reduces the chance of a calculation error."],
+["Which population number would you use: 319 million or 320 million?","320 million."],
+["Households of 2.5 people each, population 319M. What do you calculate?","320M ÷ 2.5 = 128M households."]]
+}});
+
+SECTIONS.push({id:'basics',group:'3. Math skills',title:'Math basics',desc:'Fractions, decimals, percentages, ratios, statistics, algebra',
+concept:'<h3>Fractions, decimals, percentages</h3>'+
+tbl(['Fraction','Decimal','Percent'],[['1/2','0.5','50%'],['1/4','0.25','25%'],['1/5','0.2','20%'],['1/8','0.125','12.5%'],['1/10','0.1','10%'],['1/3','0.33','33%'],['1/6','0.17','17%']])+
+'<h3>Percentage shortcuts</h3>'+
+tbl(['To find','Do this','Example'],[
+ ['10%','Move the decimal one place','10% of $48.6M ≈ $4.9M'],
+ ['20%','Double the 10%','≈ $9.7M'],
+ ['5%','Half of the 10%','5% of $30K = $1.5K'],
+ ['70%','100% minus 30%','70% of $19.6K ≈ $13.7K']])+
+'<p>Percent change = change ÷ the starting number. Margin = profit ÷ revenue.</p>'+
+'<h3>Other basics</h3><ul>'+
+'<li>Ratios: add the parts, find the value of one part, then scale. Split $50 in a 3:2 ratio: 5 parts, $10 each, so $30 and $20.</li>'+
+'<li>Mean = sum ÷ count. Median = the middle value when sorted. One huge value pulls the mean up, so the median is often better to quote.</li>'+
+'<li>Weighted average: when groups differ in size, weight them. 60% pay $40 and 40% pay $60: 0.6 × 40 + 0.4 × 60 = $48.</li>'+
+'<li>Algebra: write the unknown as x, write the formula, solve for x.</li></ul>'+
+'<h3>When the interviewer changes a number</h3><ol>'+
+'<li>Stay calm. The method stays the same. Only one number in your chain changes.</li>'+
+'<li>Say what changed. Find where it enters your math.</li>'+
+'<li>Redo only that step and what comes after, out loud.</li>'+
+'<li>Say what it means, and whether your recommendation changes.</li></ol>'+
+'<p>If you make a math mistake, say it plainly: "I see I made an error. Let me redo that." Interviewers care more about how you recover.</p>'+
+'<h3>Three rules</h3><ol><li>Round first, adjust after.</li><li>Say units every time ($K or $M).</li><li>Do a size check: does the answer make sense?</li></ol>',
+example:'<p>A park earns $60M and grows 15%. New revenue?</p><ul><li>10% of $60M = $6M. 5% = $3M. So +15% = $9M.</li><li>New revenue = $60M + $9M = $69M.</li></ul>'+
+say('Ten percent is $6M, five percent is $3M, so growth is $9M and the new revenue is $69M.'),
+practice:[
+ ['What is 3/8 as a percent?','1/8 is 12.5%, so 3/8 is 37.5%.'],
+ ['4,000 visitors × $2.50. Total?','4 × 2.5 = 10, then add the zeros: $10,000.'],
+ ['Gate, food and retail earn 5:3:2 on $50M. How much is food?','10 parts, $5M each. Food is 3 parts: $15M.'],
+ ['Three shops earn $20K, $30K and $100K. Mean and median? Which is better to quote?','Mean = $50K. Median = $30K. The median is better because the $100K shop pulls the mean up.'],
+ ['A $12M investment earns $3M a year after $1M of yearly costs. Payback?','Yearly profit = $2M. $12M ÷ $2M = 6 years.']],
+pics:[],
+cards:{
+"Fractions":[
+["What is 1/4 as a percent?","25%"],
+["What is 1/8 as a percent?","12.5%"],
+["What is 1/3 as a percent?","About 33%"],
+["What is 3/4 of $80K?","1/4 is $20K, so 3/4 is $60K."],
+["What is 1/5 as a decimal?","0.2 (which is 20%)"]],
+"Percentages":[
+["Find 20% of $48.6M","10% is about $4.9M. Double it: about $9.7M."],
+["Profit goes from $20K to $34K. Percent change?","Change ÷ starting number: 14 ÷ 20 = +70%."],
+["Profit $20K on revenue $100K. Margin?","20 ÷ 100 = 20%."],
+["Up 20%, then down 20%. Back to the start?","No. 100 becomes 120, then 96."],
+["What is 70% of $19.6K?","10% is $1.96K, times 7 is about $13.7K."]],
+"Decimals":[
+["What is $2.80 × 5,000?","Round to $3 × 5,000 = $15K, adjust down: about $14K."],
+["What is 3M × $50?","3 × 5 = 15, then add the zeros: $150M."],
+["A cup sells for $4 and costs $1.20. Profit per cup?","$4 − $1.20 = $2.80."],
+["$150M revenue from 3M visitors. Revenue per visitor?","$150M ÷ 3M = $50."],
+["Raise the price by $0.20 on 25,000 cups. Extra revenue?","0.2 × 25,000 = $5,000."]],
+"Ratios":[
+["Split $50 in a 3:2 ratio","3 + 2 = 5 parts, $10 a part. So $30 and $20."],
+["10K visitors earn $500K. What do 15K earn?","$50 each, so 15K × $50 = $750K."],
+["Gate, food and retail earn 5:3:2 on $50M. How much is food?","10 parts, $5M each. Food is 3 parts: $15M."],
+["A company earns $150M in a $3B market. Market share?","150 ÷ 3,000 = 5%."],
+["Two shops earn $40K and $60K. What is the ratio?","40:60 simplifies to 2:3."]],
+"Statistics":[
+["Mean of $20K, $30K and $100K?","$150K ÷ 3 = $50K."],
+["Median of $20K, $30K and $100K?","The middle value: $30K."],
+["Which is pulled up by one huge value, the mean or the median?","The mean."],
+["60% of visitors pay $40 and 40% pay $60. Average?","0.6 × 40 + 0.4 × 60 = $24 + $24 = $48."],
+["Median of 3, 9, 5, 100, 7?","Sort: 3, 5, 7, 9, 100. The middle is 7."]],
+"Algebra":[
+["Fixed cost $50K, profit per customer $2.80. Break-even customers?","50,000 ÷ 2.80 is about 17,900."],
+["How many customers give a $14K gain at $2.80 each?","14,000 ÷ 2.80 = 5,000."],
+["We need $14K from ideas worth $19.6K. What share must work?","14 ÷ 19.6 = about 71%."],
+["Cost $10M, earns $1M a year. Payback?","Cost ÷ yearly profit = 10 years."],
+["Solve: 3x + 10 = 40","3x = 30, so x = 10."]]
+}});
+
+SECTIONS.push({id:'strategies',group:'3. Math skills',title:'Five math strategies',desc:'Distributive, round and adjust, factors, percentages, units',
+concept:'<ol>'+
+'<li><b>Use the distributive property.</b> Split a hard number into an easy part plus a small part, multiply each, then add.</li>'+
+'<li><b>Round, then adjust.</b> Round to an easy number, calculate, then subtract or add what you rounded. Rounded up: subtract. Rounded down: add.</li>'+
+'<li><b>Use factors.</b> Break a hard divisor into small factors and divide by each in turn.</li>'+
+'<li><b>Switch the percentages.</b> a% of b equals b% of a. Pick the easier one. (The video shows 25% of 32 = 8. The swap idea is the standard trick.)</li>'+
+'<li><b>Multiply units instead of numbers.</b> Turn long numbers into K, M, B. Calculate the plain numbers, then work out the unit.</li></ol>'+
+tbl(['Unit rule','Example'],[['K × K = M','12K × 18K = 216M'],['M × K = B',''],['M ÷ K = K','1,680M ÷ 120K = 14K'],['B ÷ M = K',''],['B ÷ K = M','']])+
+'<p>Memory trick (mine): K = 1, M = 2, B = 3. Multiplying adds the numbers and dividing subtracts them.</p>'+
+'<p>Sense check: missing or extra zeros are the most common mistake. Estimate first to check the size of your answer.</p>',
+example:'<ul>'+
+'<li>Distributive: 12 × 24 = (10 + 2) × 24 = 240 + 48 = 288. Also 303 × 60 = 18,000 + 180 = 18,180.</li>'+
+'<li>Round and adjust: 490 × 22 = 22 × (500 − 10) = 11,000 − 220 = 10,780. Also 199 × 35 = 7,000 − 35 = 6,965.</li>'+
+'<li>Factors: 4,560 ÷ 24. Since 24 = 2 × 2 × 2 × 3: 4,560 ÷ 2 = 2,280, ÷ 2 = 1,140, ÷ 2 = 570, ÷ 3 = 190.</li>'+
+'<li>Switch percentages: 4% of 75 = 75% of 4 = 3.</li>'+
+'<li>Units: $1,680,000,000 across 120,000 customers. 1,680M ÷ 120K = 14, and M ÷ K = K, so $14K ($14,000) each. Cars: 12K × 18K = 216M, so $216M.</li></ul>'+
+say('That is 1,680 million over 120 thousand. 1,680 divided by 120 is 14, and million over thousand is thousand, so $14,000 per customer.'),
+practice:[
+ ['404 × 50','50 × (400 + 4) = 20,000 + 200 = 20,200.'],
+ ['299 × 40','40 × (300 − 1) = 12,000 − 40 = 11,960.'],
+ ['390 × 24','24 × (400 − 10) = 9,600 − 240 = 9,360.'],
+ ['3,600 ÷ 18 (use factors)','18 = 2 × 3 × 3. 3,600 ÷ 2 = 1,800, ÷ 3 = 600, ÷ 3 = 200.'],
+ ['16% of 50 (switch the percentages)','50% of 16 = 8.'],
+ ['$900M revenue across 30K customers. Average spend?','900M ÷ 30K = 30, and M ÷ K = K, so $30K.'],
+ ['40K units × $25K each. Total revenue?','40 × 25 = 1,000, and K × K = M, so 1,000M = $1B.'],
+ ['A teammate says 380 million × 19 = 72 billion. Sense check?','400M × 20 = 8 billion, so 72 billion is about 10 times too big. The exact answer is 7.22 billion.']],
+pics:['s1','s2','s3','s4','s5'],
+cards:{
+"1 Distributive":[
+["What is the distributive property strategy?","Split a hard number into an easy part plus a small part, multiply each, then add."],
+["Calculate 303 × 60","60 × (300 + 3) = 18,000 + 180 = 18,180."],
+["Calculate 12 × 24","(10 + 2) × 24 = 240 + 48 = 288."],
+["Calculate 15 × 32","(10 + 5) × 32 = 320 + 160 = 480."]],
+"2 Round and adjust":[
+["What is the round-and-adjust strategy?","Round to an easy number, calculate, then subtract or add back what you rounded off."],
+["Calculate 199 × 35","35 × (200 − 1) = 7,000 − 35 = 6,965."],
+["Calculate 490 × 22","22 × (500 − 10) = 11,000 − 220 = 10,780."],
+["Do you add or subtract the difference?","Rounded up: subtract the extra. Rounded down: add it back."]],
+"3 Factors":[
+["What is the factors strategy?","Break a hard number into small factors, then divide (or multiply) by each factor in turn."],
+["Set up 4,560 ÷ 24","24 = 2 × 2 × 2 × 3, so divide by 2, 2, 2 and 3."],
+["Finish 4,560 ÷ 24","4,560 ÷ 2 = 2,280. ÷ 2 = 1,140. ÷ 2 = 570. ÷ 3 = 190."],
+["Calculate 3,600 ÷ 18","18 = 2 × 3 × 3. 3,600 ÷ 2 = 1,800. ÷ 3 = 600. ÷ 3 = 200."],
+["Calculate 2,520 ÷ 12","12 = 2 × 2 × 3. 2,520 ÷ 2 = 1,260. ÷ 2 = 630. ÷ 3 = 210."]],
+"4 Switch percentages":[
+["What is the switch-the-percentages idea?","a% of b equals b% of a. Pick whichever version is easier to calculate."],
+["What is 25% of 32?","8. (Also: 32% of 25 = 25 × 0.32 = 8.)"],
+["What is 4% of 75?","Switch: 75% of 4 = 3."],
+["What is 16% of 50?","Switch: 50% of 16 = 8."]],
+"5 Units":[
+["What do K, M and B stand for?","K = thousand (1,000). M = million (1,000,000). B = billion (1,000,000,000)."],
+["Convert 17,000, 140,000,000 and 8,100,000,000","17K, 140M and 8.1B."],
+["What are the five unit rules?","K × K = M. M × K = B. M ÷ K = K. B ÷ M = K. B ÷ K = M."],
+["What is the memory trick for the unit rules?","K = 1, M = 2, B = 3. Multiplying adds the numbers and dividing subtracts them."],
+["$1,680,000,000 revenue across 120,000 customers. Average spend?","1,680M ÷ 120K = 14, and M ÷ K = K, so $14K ($14,000)."],
+["12,000 cars sold at $18,000 each. Revenue?","12K × 18K: 12 × 18 = 216, and K × K = M, so $216M."],
+["40K units at $25K each. Revenue?","40 × 25 = 1,000, and K × K = M, so 1,000M = $1B."]],
+"Sense check":[
+["What is the most common math mistake?","Missing zeros or adding extra zeros."],
+["125 million × 24. What size should the answer be?","100M × 20 = 2 billion, so expect billions. Exact: 3 billion."],
+["A teammate says 380 million × 19 = 72 billion. Does it pass?","No. 400M × 20 = 8 billion, so it is about 10 times too big. Exact: 7.22 billion."]]
+}});
+
+SECTIONS.push({id:'coffee',group:'4. Practice and review',title:'Practice case: coffee shop',desc:'Same format as the amusement park case',
+concept:'<p>All numbers are made-up examples that add up with each other.</p>'+
+'<h3>The prompt</h3><p>You are advising the owner of a small coffee shop. Profit has fallen from $34K to $20K in one year. The owner wants profit back to $34K within 12 months and has $10K to spend. The owner is also wondering whether to open a second shop. What do you recommend?</p>'+
+'<h3>Clarifying questions and what the interviewer answers</h3><ul>'+
+'<li>Goal and budget? Get profit back to $34K (+$14K) within 12 months. $10K is available.</li>'+
+'<li>What changed this year? Prices and costs per cup are the same. A chain coffee shop opened nearby about 10 months ago.</li>'+
+'<li>How many customers? 25,000 a year now, down from 30,000. Average spend is $4.</li>'+
+'<li>What are the costs? Fixed costs (rent, staff pay) are $50K a year and did not change. Ingredients and cups are $1.20 per customer.</li>'+
+'<li>The second shop? It costs $60K to set up and would earn about $10K a year. The owner would need a loan.</li></ul>'+
+'<h3>Data room</h3>'+
+tbl(['Item','Last year','This year'],[['Customers','30,000','25,000'],['Revenue ($4 each)','$120K','$100K'],['Ingredients and cups ($1.20 each)','$36K','$30K'],['Fixed costs','$50K','$50K'],['Profit','$34K','$20K']]),
+example:'<h3>The numbers, step by step</h3>'+
+tbl(['Step','What we are working out','The math','Result'],[
+ ['1','The gap','$34K − $20K','$14K to win back'],
+ ['2','Which profit tree branch moved?','Price same, fixed cost same, only customers fell','Volume is the problem'],
+ ['3','What is one customer worth?','$4 − $1.20','$2.80'],
+ ['4','Check the drop','5,000 fewer customers × $2.80','$14K, matches the gap'],
+ ['5','What do the four ideas earn?','$5.6K + $7.5K + $5K + $1.5K','$19.6K'],
+ ['6','How much will we really get?','$19.6K × 70%','About $13.7K'],
+ ['7','Where does profit end up?','$20K + $13.7K','About $33.7K'],
+ ['8','Does the second shop pay back?','$60K ÷ $10K a year','6 years']])+
+'<p>The four ideas: loyalty card wins back 2,000 customers × $2.80 = $5.6K (costs about $2K). Pastry add-on: 5,000 customers buy a $3 pastry earning $1.50 = $7.5K (display case about $3K, pays back in about 5 months). Price rise: +$0.20 on 25,000 cups = $5K, assuming nobody leaves. Less waste: 5% of the $30K ingredient bill = $1.5K.</p>'+
+'<h3>What you would say out loud (CLEAR)</h3>'+
+'<p><b>C: Clarify.</b> "So profit fell from $34K to $20K, and the owner wants it back in 12 months with $10K to spend. Before I start: what changed this year, how many customers do we have, and what are the costs? If you don\'t have them, I\'ll assume."</p>'+
+'<p><b>L: Lay out.</b> "Profit is revenue minus cost. I\'ll split revenue into price times customers, and cost into fixed and variable. Then I\'ll look at the second shop separately."</p>'+
+'<p><b>E: Evaluate.</b> "Price and fixed costs didn\'t change. Customers fell from 30,000 to 25,000. Each customer earns $2.80, so 5,000 fewer customers is $14K, exactly the gap. So volume is the problem, probably because of the new chain. I see four ideas worth $19.6K in total: loyalty card, pastries, a small price rise and less waste."</p>'+
+'<p><b>A: Assess.</b> "I wouldn\'t count on all of it. At 70%, that\'s about $13.7K, so profit gets back to about $33.7K, nearly the target. The second shop earns $10K a year on $60K, a 6-year payback, and it adds risk while the first shop is still weak."</p>'+
+'<p><b>R: Recommend.</b> "Don\'t open a second shop yet. Two reasons: the ideas almost reach the target with the $10K budget, and the second shop pays back too slowly. Start with the loyalty card and less waste because they are cheap and quick, then add pastries, then the price rise. Risks are customers leaving over the price rise and staff time. Recheck the second shop after 12 months."</p>',
+practice:[
+ ['How many customers must we win back for +$14K?','$14K ÷ $2.80 = 5,000.'],
+ ['What share of the four ideas must work to close the gap?','$14K ÷ $19.6K = about 71%.'],
+ ['How many customers do we need just to break even?','Fixed cost $50K ÷ $2.80 = about 17,900 a year.'],
+ ['Why not just raise prices a lot?','There is a new nearby alternative, so a big rise may push customers away. Each lost customer costs $2.80, so losing 1,000 customers wipes out $2.8K. Do a small rise last and watch customer numbers.'],
+ ['How confident are you in the pastry idea?','Medium. It assumes 1 in 5 customers add a $3 pastry. Test it for a month with a small display, then scale only if profit per pastry stays near $1.50.'],
+ ['What if the chain cuts its prices?','We cannot win a price war with a bigger player. Focus on regulars, quality and the loyalty card, and keep our price steady.'],
+ ['What would change your mind about the second shop?','Evidence that it would earn much more than $10K a year, or a much cheaper setup. For a payback under about 3 years it would need about $20K a year on $60K.'],
+ ['What data would you ask for next?','Customers by month since the chain opened, regulars versus one-time customers, the share buying food, and weekly waste.']],
+pics:[],
+cards:null,
+after:'<h3>Risks and what to do</h3>'+
+tbl(['Risk','What to do'],[['Customers dislike the price rise','Raise it last, by a small amount, and watch customer numbers'],['Ideas deliver less than planned','Plan for 70%, track monthly, keep a spare idea ready'],['Chain keeps taking customers','Focus on regulars, the loyalty card and quality']])+
+'<h3>Common mistakes</h3>'+
+tbl(['Mistake','What to do instead'],[['Jumping to the second shop','First find out why profit fell. Here only customers moved.'],['Using revenue instead of profit per customer','Each customer earns $2.80, not $4. Use that for all the math.'],['Presenting 100% of the ideas as the plan','Haircut to 70% and show a range.'],['Forgetting to say assumptions','Say "I\'ll assume..." and invite correction.'],['Skipping the check','Confirm that 5,000 × $2.80 = $14K matches the gap.'],['Hiding the math','Say each step out loud, with units.']])+
+'<h3>Key numbers to remember</h3><ul><li>Gap: $14K. One customer earns $2.80. So 5,000 customers is the whole gap.</li><li>Four ideas: $19.6K. At 70%: about $13.7K.</li><li>Second shop: $60K ÷ $10K = 6 years.</li></ul>'});
+
+SECTIONS.push({id:'study',group:'4. Practice and review',title:'Study tools',desc:'Plans, daily drills and a one-page cheat sheet',
+concept:'<h3>One-week plan (about 20 to 30 minutes a day)</h3>'+
+tbl(['Day','Focus','What to do'],[
+ ['Mon','Profit tree','Review the profit tree picture. Do the pizza profit numbers and name the two main branches out loud.'],
+ ['Tue','Math out loud','Solve park revenue (3M × $50), a 20% profit increase and a margin. Say units and each step.'],
+ ['Wed','Payback','Cost $6M earning $2M a year. Then compare the lease ($10M, $1M a year) with the pricing change ($2M, $1M a year).'],
+ ['Thu','3Cs','Run the 3Cs on a food truck entering a new town, out loud.'],
+ ['Fri','CLEAR steps','Read the coffee shop case "What you would say out loud". Then say it again in your own words.'],
+ ['Sat','Full case','Do the coffee shop case with a voice recording: clarify, structure, math, recommendation, two risks. Pick one thing to improve.'],
+ ['Sun','Cheat sheet','Review the cheat sheet and redo the one thing you picked. Then rest.']])+
+'<p>If you miss a day, do not catch up. Move on. Protect the Saturday full case.</p>'+
+'<h3>Flash card review schedule (about 10 minutes a day)</h3>'+
+tbl(['Day','Do this'],[
+ ['1','Fractions and Percentages cards. Say each answer out loud before flipping.'],
+ ['2','Decimals and Ratios cards. Redo yesterday\'s misses.'],
+ ['3','Statistics and Algebra cards. Redo the misses from Days 1 and 2.'],
+ ['4','Pick 10 cards at random. Aim for under a minute each.'],
+ ['5','Redo only the cards you have missed. Write each answer from memory.'],
+ ['6','Do the Math basics practice questions, then make 3 of your own cards from mistakes.'],
+ ['7','10 random cards, then stop. Rest.']])+
+'<p>Keep a list of cards you missed. Repeat them the next day and again 3 days later. Retire a card after two right answers in a row.</p>'+
+'<h3>One-page cheat sheet</h3>'+
+tbl(['If the case is about...','Use','Key question'],[['Falling profit','Profit tree','Which branch moved?'],['Many products','BCG matrix','Where does the money go?'],['New market or product','3Cs','Can we, do they want it, who else?'],['Spend decision','Payback','How many years to get it back?']])+
+'<p><b>CLEAR:</b> Clarify, Lay out, Evaluate, Assess, Recommend. Recommendation first, then two reasons, then risks and next steps.</p>'+
+'<p><b>Formulas:</b> Profit = revenue − cost. Revenue = price × quantity. Margin = profit ÷ revenue. Payback = cost ÷ yearly profit. ROI = profit ÷ cost. Breakeven = fixed cost ÷ (price − variable cost).</p>'+
+'<p><b>Phrases:</b> "Let me restate the problem." "Can I take a moment to structure my thinking?" "I\'ll assume X, is that okay?" "My recommendation is X, for two reasons."</p>'+
+'<p><b>If you feel lost:</b> restate the problem, ask one clarifying question, then say, "I\'d like to split this into revenue and cost."</p>',
+example:'<p>Daily number drill, Day 1: five problems, about five minutes. Say every step out loud with units.</p>',
+practice:[
+ ['3M visitors × $50 each. Revenue?','$150M.'],
+ ['Revenue $100K, cost $80K. Profit?','$20K.'],
+ ['Profit $20K on $100K revenue. Margin?','20% (20 ÷ 100).'],
+ ['Profit $20K grows 20%. New profit?','$24K (20% of 20 is 4).'],
+ ['A cup sells for $4 and costs $1.20 to make. What does one customer earn?','$2.80.'],
+ ['Day 2 sample: cost $6M, earns $2M a year. Payback?','3 years (6 ÷ 2).'],
+ ['Day 3 sample: fixed cost $50K, each customer earns $2.80. Customers to break even?','About 17,900 (50,000 ÷ 2.80).'],
+ ['Day 4 sample: profit goes from $20K to $34K. Percent increase?','+70% (14 ÷ 20).'],
+ ['Day 5 sample: ideas worth $19.6K, but we expect 70%. What do we get?','About $13.7K.'],
+ ['Day 6 sample: raise the price by $0.20 on 25,000 cups. Extra revenue?','$5K.'],
+ ['Day 7 sample: win back $14K at $2.80 a customer. How many customers?','5,000.']],
+pics:[],cards:null});
+(function(){
+var HEADS={coffee:['The case','The numbers','Practice and follow-ups'],study:['Plans and cheat sheet','Daily number drill','Drills']};
+var ZSTEPS=[1,1.5,2,2.5,3];
+var state={};
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function groupNames(sec){return sec.cards?Object.keys(sec.cards):[];}
+function cardCount(sec){var n=0,g=groupNames(sec),i;for(i=0;i<g.length;i++){n+=sec.cards[g[i]].length;}return n;}
+
+function figHTML(key){
+  var d=DIAGRAMS[key];
+  return '<figure class="pic" data-zi="0"><figcaption><span class="ft">'+esc(d.title)+'</span>'+
+    '<button type="button" data-z="out" aria-label="Zoom out">−</button>'+
+    '<button type="button" data-z="in" aria-label="Zoom in">+</button>'+
+    '<button type="button" data-z="reset">Reset</button>'+
+    '<span class="zl" aria-live="polite">Zoom 100%</span></figcaption>'+
+    '<div class="zw">'+d.svg()+'</div>'+
+    '<p class="hint">Tap + to zoom in, then drag sideways to move around.</p></figure>';
+}
+
+function cardsHTML(sec){
+  var names=groupNames(sec);
+  if(!names.length){return '';}
+  state[sec.id]=names[0];
+  var h='<h3>Flash cards</h3><div class="fcs" data-sec="'+sec.id+'">';
+  if(names.length>1){
+    h+='<div class="chips" role="group" aria-label="Card groups">';
+    var i;
+    for(i=0;i<names.length;i++){h+='<button type="button" data-grp="'+esc(names[i])+'" aria-pressed="'+(i===0?'true':'false')+'">'+esc(names[i])+'</button>';}
+    h+='</div>';
+  }
+  h+='<p class="cnt"></p><div class="deck"></div></div>';
+  return h;
+}
+
+function renderDeck(box){
+  var id=box.getAttribute('data-sec'),sec=null,i;
+  for(i=0;i<SECTIONS.length;i++){if(SECTIONS[i].id===id){sec=SECTIONS[i];}}
+  var name=state[id],list=sec.cards[name],h='';
+  for(i=0;i<list.length;i++){
+    h+='<button type="button" class="fc" data-i="'+i+'" aria-label="Flash card. Tap to flip."><span class="lab">Tap to flip</span><span class="tx">'+esc(list[i][0])+'</span></button>';
+  }
+  box.querySelector('.deck').innerHTML=h;
+  box.querySelector('.cnt').textContent=name+' · '+list.length+(list.length===1?' card':' cards');
+  var chips=box.querySelectorAll('.chips button'),k;
+  for(k=0;k<chips.length;k++){chips[k].setAttribute('aria-pressed',chips[k].getAttribute('data-grp')===name?'true':'false');}
+}
+
+function sectionHTML(sec,idx){
+  var hd=HEADS[sec.id]||['Concept','Worked example','Practice'];
+  var meta=[],n=cardCount(sec),i;
+  if(n){meta.push(n+' cards');}
+  if(sec.pics.length){meta.push(sec.pics.length+(sec.pics.length===1?' picture':' pictures'));}
+  var badge=sec.starter?'<span class="badge warn">Starter cards</span>':'';
+  var h='<details class="sec" id="sec-'+sec.id+'"'+(idx===0?' open':'')+'><summary><span><span class="st">'+esc(sec.title)+badge+'</span><span class="sd">'+esc(sec.desc)+(meta.length?' · '+meta.join(' · '):'')+'</span></span></summary><div class="body">';
+  h+='<h3>'+hd[0]+'</h3>'+sec.concept;
+  h+='<h3>'+hd[1]+'</h3>'+sec.example;
+  h+='<h3>'+hd[2]+'</h3>';
+  for(i=0;i<sec.practice.length;i++){
+    h+='<details class="qa"><summary>'+esc(sec.practice[i][0])+'</summary><div class="ans">'+esc(sec.practice[i][1])+'</div></details>';
+  }
+  if(sec.after){h+=sec.after;}
+  if(sec.pics.length){
+    h+='<h3>Pictures</h3>';
+    for(i=0;i<sec.pics.length;i++){h+=figHTML(sec.pics[i]);}
+  }
+  h+=cardsHTML(sec);
+  return h+'</div></details>';
+}
+
+function build(){
+  var app=document.getElementById('app'),toc=document.getElementById('toc'),h='',groups=[],byGroup={},i;
+  for(i=0;i<SECTIONS.length;i++){
+    var s=SECTIONS[i];
+    if(!byGroup[s.group]){byGroup[s.group]=[];groups.push(s.group);}
+    byGroup[s.group].push(s);
+  }
+  var t='';
+  for(i=0;i<groups.length;i++){
+    t+='<div><b>'+esc(groups[i])+'</b>';
+    var j;
+    for(j=0;j<byGroup[groups[i]].length;j++){t+='<a href="#sec-'+byGroup[groups[i]][j].id+'">'+esc(byGroup[groups[i]][j].title)+'</a>';}
+    t+='</div>';
+  }
+  toc.innerHTML=t;
+  var idx=0;
+  for(i=0;i<groups.length;i++){
+    h+='<h2>'+esc(groups[i])+'</h2>';
+    var k;
+    for(k=0;k<byGroup[groups[i]].length;k++){h+=sectionHTML(byGroup[groups[i]][k],idx);idx+=1;}
+  }
+  app.innerHTML=h;
+  var boxes=app.querySelectorAll('.fcs'),b;
+  for(b=0;b<boxes.length;b++){renderDeck(boxes[b]);}
+}
+
+function openFromHash(){
+  var hash=window.location.hash;
+  if(hash&&hash.indexOf('#sec-')===0){
+    var el=document.getElementById(hash.slice(1));
+    if(el){el.open=true;el.scrollIntoView();}
+  }
+}
+
+function applyZoom(fig){
+  var i=parseInt(fig.getAttribute('data-zi'),10),svg=fig.querySelector('svg');
+  svg.style.width=Math.round(ZSTEPS[i]*100)+'%';
+  fig.querySelector('.zl').textContent='Zoom '+Math.round(ZSTEPS[i]*100)+'%';
+  fig.querySelector('[data-z="in"]').disabled=(i===ZSTEPS.length-1);
+  fig.querySelector('[data-z="out"]').disabled=(i===0);
+  if(i===0){fig.querySelector('.zw').scrollLeft=0;}
+}
+
+document.addEventListener('click',function(e){
+  var el=e.target;
+  while(el&&el!==document&&!(el.matches&&(el.matches('.fc')||el.matches('[data-z]')||el.matches('[data-grp]')))){el=el.parentNode;}
+  if(!el||el===document){return;}
+  if(el.matches('.fc')){
+    var box=el.closest('.fcs'),id=box.getAttribute('data-sec'),sec=null,q;
+    for(q=0;q<SECTIONS.length;q++){if(SECTIONS[q].id===id){sec=SECTIONS[q];}}
+    var pair=sec.cards[state[id]][parseInt(el.getAttribute('data-i'),10)];
+    var flipped=el.classList.toggle('flip');
+    el.querySelector('.lab').textContent=flipped?'Answer':'Tap to flip';
+    el.querySelector('.tx').textContent=flipped?pair[1]:pair[0];
+  }else if(el.matches('[data-grp]')){
+    var bx=el.closest('.fcs');
+    state[bx.getAttribute('data-sec')]=el.getAttribute('data-grp');
+    renderDeck(bx);
+  }else{
+    var fig=el.closest('figure.pic'),zi=parseInt(fig.getAttribute('data-zi'),10),act=el.getAttribute('data-z');
+    if(act==='in'&&zi<ZSTEPS.length-1){zi+=1;}
+    if(act==='out'&&zi>0){zi-=1;}
+    if(act==='reset'){zi=0;}
+    fig.setAttribute('data-zi',String(zi));
+    applyZoom(fig);
+  }
+});
+
+document.getElementById('openAll').addEventListener('click',function(){
+  var d=document.querySelectorAll('details.sec'),i;for(i=0;i<d.length;i++){d[i].open=true;}
+});
+document.getElementById('closeAll').addEventListener('click',function(){
+  var d=document.querySelectorAll('details.sec'),i;for(i=0;i<d.length;i++){d[i].open=false;}
+});
+window.addEventListener('hashchange',openFromHash);
+
+build();
+var figs=document.querySelectorAll('figure.pic'),f;
+for(f=0;f<figs.length;f++){applyZoom(figs[f]);}
+openFromHash();
+})();
+</script>
+</body>
+</html>
