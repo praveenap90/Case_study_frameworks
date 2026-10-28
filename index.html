@@ -20,7 +20,7 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.65 var(--sans)}
-.wrap{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+.wrap{max-width:1180px;margin:0 auto;padding:24px clamp(16px,4vw,48px) 64px}
 h1{font-size:24px;line-height:1.3;font-weight:500;margin:0 0 6px}
 h2{font-size:26px;line-height:1.25;font-weight:600;margin:36px 0 12px}
 h3{font-size:15px;font-weight:500;margin:20px 0 6px;color:var(--acct)}
@@ -42,6 +42,11 @@ button{font:inherit;font-size:14px;color:var(--text);background:transparent;bord
 button:hover{background:var(--soft)}
 button:focus-visible,summary:focus-visible,.fc:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 button:disabled{opacity:.4;cursor:default}
+.gnav{position:sticky;top:0;z-index:20;display:flex;gap:8px;overflow-x:auto;white-space:nowrap;margin:12px 0 0;padding:10px 0;background:var(--bg,Canvas);border-bottom:.5px solid var(--line);scrollbar-width:thin}
+.gnav a{flex:0 0 auto;font-size:15px;font-weight:500;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--acc);text-decoration:none}
+.gnav a:hover{background:var(--accbg)}
+.gnav a.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+h2[id^=grp-]{scroll-margin-top:72px}
 .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0 4px}
 .toc div{background:var(--card);border:.5px solid var(--line);border-radius:12px;padding:10px 14px}
 .toc b{font-weight:500;font-size:14px;display:block;margin-bottom:4px}
@@ -96,7 +101,7 @@ figure.pic figcaption button{padding:4px 12px;min-height:36px}
 #tip b.tt{display:block;font-size:16px;font-weight:600;color:var(--acct);margin-bottom:4px}
 #tip p{margin:0 0 10px;font-size:15px}
 #tip .tb{display:flex;gap:8px;flex-wrap:wrap}
-.donebox{margin:22px 0 0;padding-top:14px;border-top:.5px solid var(--line)}
+.donebox{margin:22px 0 0;padding-top:14px;border-top:.5px solid var(--line);display:flex;gap:10px;flex-wrap:wrap}
 .donebtn[aria-pressed="true"]{background:var(--okbg);color:var(--okt);border-color:transparent}
 .sec.done>summary .st::after{content:"\2713 Done";font-size:12px;font-weight:400;margin-left:8px;padding:2px 8px;border-radius:8px;background:var(--okbg);color:var(--okt)}
 .prog{margin:8px 0 2px;font-size:13px;color:var(--muted)}
@@ -104,6 +109,14 @@ figure.pic figcaption button{padding:4px 12px;min-height:36px}
 .pbar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
 
 
+
+/* wide screens */
+.body>p,.body>ul,.body>ol,.body>.note,.body>.say{max-width:80ch}
+figure.pic{max-width:780px}
+.qa{max-width:900px}
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;align-items:start}
+.deck .fc{margin:0}
+@media (min-width:900px){.sec>summary{padding:16px 20px}.sec .body{padding:0 24px 24px}}
 /* bigger headings and labels */
 h1{font-size:30px}
 h3{font-size:20px;font-weight:600;margin:26px 0 8px}
@@ -180,14 +193,14 @@ button:active{transform:translateY(1px)}
 <body>
 <div class="wrap">
 <h1>Case interview numbers and frameworks</h1>
-<p class="lead">Short sections you can open one at a time. Each one goes concept, worked example, practice, pictures, then flash cards.</p>
 <div class="intro"><h3>What this page is about</h3>
-<p>A case interview gives you a business problem and asks you to think out loud and do quick math. Companies like Capital One use it for data analyst and data engineer roles. A framework is just a simple structure for organizing your thinking, so you do not freeze or miss something important.</p>
+<p>A case interview gives you a business problem and asks you to think out loud and do quick math. It is common for data analyst and data engineer roles. A framework is just a simple structure for organizing your thinking, so you do not freeze or miss something important.</p>
 <p>This page is a study kit in four parts: pick the approach, know the question types, sharpen your math, then practice and review. Every section follows the same order: the idea, a worked example, practice questions, pictures and flash cards.</p></div>
 <div class="how"><b>How to use this page</b>
 <ol><li>Open one section. Read the concept and the worked example.</li><li>Try the practice questions before you tap the answer.</li><li>Tap a flash card to flip it. Say the answer out loud first.</li><li>Tap any highlighted term, like BCG matrix or Payback, to see what it means. Mark a section as done when you finish it.</li></ol></div>
 <div class="bar"><button type="button" id="openAll">Open all sections</button><button type="button" id="closeAll">Close all sections</button><button type="button" id="themeBtn" aria-label="Change colour theme">Theme: Auto</button></div>
 <div class="prog"><span id="progTxt"></span><div class="pbar"><i id="pfill"></i></div></div>
+<nav class="gnav" id="gnav" aria-label="Jump to a group"></nav>
 <div class="toc" id="toc"></div>
 <div id="app"></div>
 <div id="tip" role="dialog" aria-live="polite" hidden></div>
@@ -1302,11 +1315,18 @@ function build(){
   toc.innerHTML=t;
   var idx=0;
   for(i=0;i<groups.length;i++){
-    h+='<h2>'+esc(groups[i])+'</h2>';
+    h+='<h2 id="grp-'+i+'">'+esc(groups[i])+'</h2>';
     var k;
     for(k=0;k<byGroup[groups[i]].length;k++){h+=sectionHTML(byGroup[groups[i]][k],idx);idx+=1;}
   }
   app.innerHTML=h;
+  var gn=document.getElementById('gnav'),gh='';
+  for(i=0;i<groups.length;i++){gh+='<a href="#grp-'+i+'" data-g="'+i+'">'+esc(groups[i])+'</a>';}
+  gn.innerHTML=gh;
+  gn.addEventListener('click',function(ev){var a=ev.target.closest?ev.target.closest('a[data-g]'):null;if(!a)return;ev.preventDefault();forced=+a.getAttribute('data-g');var el=document.getElementById('grp-'+a.getAttribute('data-g'));var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(el)el.scrollIntoView({behavior:rm?'auto':'smooth',block:'start'});setTimeout(paintG,50);setTimeout(paintG,600);});
+  var forced=-1;
+  function paintG(){var hs=document.querySelectorAll('h2[id^=grp-]'),cur=-1,q;for(q=0;q<hs.length;q++){if(hs[q].getBoundingClientRect().top<=110)cur=q;}var bot=window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-4;if(bot&&forced>=0)cur=forced;var as=gn.querySelectorAll('a'),w;for(w=0;w<as.length;w++){as[w].classList.toggle('on',w===cur);if(w===cur&&as[w].scrollIntoView&&gn.scrollWidth>gn.clientWidth){gn.scrollLeft=Math.max(0,as[w].offsetLeft-12);}}}
+  window.addEventListener('scroll',paintG,{passive:true});['wheel','touchstart','keydown'].forEach(function(n){window.addEventListener(n,function(){forced=-1;},{passive:true});});paintG();
   var boxes=app.querySelectorAll('.fcs'),b;
   for(b=0;b<boxes.length;b++){renderDeck(boxes[b]);}
 }
