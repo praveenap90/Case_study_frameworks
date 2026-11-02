@@ -68,6 +68,7 @@ button:disabled{opacity:.4;cursor:default}
 .cs tr:nth-child(8n+6){--cl:#BA7517;--cb:rgba(186,117,23,.2)}
 .cs tr:nth-child(8n+7){--cl:#639922;--cb:rgba(99,153,34,.2)}
 .cs tr:nth-child(8n+8){--cl:#888780;--cb:rgba(136,135,128,.2)}
+.toc[hidden]{display:none!important}
 /* modules */
 .mod{margin:0 0 22px;border:1px solid var(--bd,var(--line));border-left:6px solid var(--acc);border-radius:16px;background:var(--soft);box-shadow:var(--sh,none)}
 .mod>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px clamp(14px,2.5vw,24px)}
@@ -1698,6 +1699,47 @@ subs:[
  p:[['Integration rises from 50% to 60%. How many active merchants?','20,000 × 60% × 80% = 9,600.'],['2,400 more merchants at $2K a year each. Extra revenue?','2,400 × $2K = $4.8M a year.'],['The fix costs $1.2M and adds $4.8M a year. Payback?','1.2 ÷ 4.8 = 0.25 years, about 3 months.']]}
 ]});
 (function(){var a=SECTIONS.pop(),i,p=SECTIONS.length;for(i=0;i<SECTIONS.length;i++){if(SECTIONS[i].id==='giantbus'){p=i+1;}}SECTIONS.splice(p,0,a);})();
+})();
+(function(){
+function F(t){return '<div class="say"><b>'+t+'</b></div>';}
+SECTIONS.push({id:'formulas',group:'3. Math skills',title:'Key formulas with examples',desc:'Margins, share, growth, perpetuity and elasticity. Generic numbers',
+concept:'',example:'',practice:[],pics:[],
+subs:[
+{t:'Profit formulas',d:'Gross profit, operating profit and contribution margin',
+ c:'<ul><li><b>Gross profit</b> = revenue − cost of goods sold (COGS). Gross margin = gross profit ÷ revenue.</li><li><b>Operating profit</b> = gross profit − operating expenses (rent, salaries, marketing). Operating margin = operating profit ÷ revenue.</li><li><b>Contribution margin</b> = price − variable cost per unit. Contribution margin ratio = contribution margin ÷ price.</li></ul>'+F('Breakeven units = fixed costs ÷ contribution margin per unit'),
+ e:'<ul><li>Revenue $500K, COGS $300K: gross profit = $200K, gross margin = 40%.</li><li>Operating expenses $140K: operating profit = $200K − $140K = $60K, operating margin = 12%.</li><li>Pizza store: price $10, variable cost $4, so contribution margin = $6 per pizza (60% ratio). At 100,000 pizzas: $600K − $300K fixed = $300K profit. Breakeven = $300K ÷ $6 = 50,000 pizzas.</li></ul>',
+ p:[['Revenue $800K, COGS $480K, operating expenses $200K. Gross profit and operating profit?','Gross profit = $320K (40%). Operating profit = $320K − $200K = $120K (15%).'],['Price $20, variable cost $8, fixed costs $60K. Breakeven units?','Contribution margin = $12. Breakeven = $60K ÷ $12 = 5,000 units.']]},
+{t:'Market share and relative market share',d:'How big you are, and how big compared with the leader',
+ c:'<ul><li><b>Market share</b> = your sales ÷ total market sales.</li><li><b>Relative market share</b> = your market share ÷ the largest competitor\'s market share. Above 1 means you lead. Below 1 means you trail. The BCG matrix uses it.</li></ul>',
+ e:'<ul><li>Sales $30M in a $200M market: market share = 15%.</li><li>The largest rival has 30%: relative share = 15% ÷ 30% = 0.5.</li><li>If you are the leader with 30% and the next rival has 15%: relative share = 30% ÷ 15% = 2.0.</li></ul>',
+ p:[['Sales $45M in a $300M market. Market share?','$45M ÷ $300M = 15%.'],['Your share is 10% and the biggest rival has 40%. Relative market share?','10% ÷ 40% = 0.25.']]},
+{t:'Growth: CAGR and the rule of 72',d:'Average yearly growth, and years to double',
+ c:'<ul><li><b>CAGR</b> (compound annual growth rate) = (end value ÷ start value)<sup>1/years</sup> − 1. It is the steady yearly growth that gets you from start to end.</li><li><b>Rule of 72:</b> years to double = 72 ÷ growth rate in %.</li></ul>',
+ e:'<ul><li>Revenue grows from $100M to $144M in 2 years. 144 ÷ 100 = 1.44. A number that squares to 1.44 is 1.2, so CAGR = 20%.</li><li>Rule of 72 at 9% growth: 72 ÷ 9 = 8 years to double.</li><li>Check: at 20% growth, 72 ÷ 20 = 3.6 years to double.</li></ul>',
+ p:[['$200M grows to $242M in 2 years. CAGR?','242 ÷ 200 = 1.21. Square root of 1.21 = 1.1, so 10%.'],['A market grows 6% a year. Years to double?','72 ÷ 6 = 12 years.']]},
+{t:'Return: ROI and the perpetuity formula',d:'What an investment earns, and what a steady payment stream is worth',
+ c:'<ul><li><b>ROI</b> = (gain − cost) ÷ cost = profit ÷ investment.</li><li><b>Perpetuity</b> (a fixed payment forever) = payment per year ÷ discount rate.</li><li><b>Growing perpetuity</b> = next year\'s payment ÷ (discount rate − growth rate).</li></ul>',
+ e:'<ul><li>ROI: invest $100M, sell for $130M. ROI = $30M ÷ $100M = 30%.</li><li>Perpetuity: $5M a year forever at a 10% discount rate is worth $5M ÷ 0.10 = $50M.</li><li>Growing perpetuity: the first payment is $5M and grows 2% a year, at 10%: $5M ÷ (0.10 − 0.02) = $62.5M.</li></ul>',
+ p:[['Invest $50M and sell for $65M. ROI?','Profit $15M ÷ $50M = 30%.'],['$3M a year forever at a 12% discount rate. Value?','$3M ÷ 0.12 = $25M.']]},
+{t:'Price elasticity',d:'How much demand moves when the price moves',
+ c:'<ul><li><b>Elasticity</b> = % change in quantity ÷ % change in price.</li><li>Ignore the sign when judging: above 1 is <b>elastic</b> (customers react a lot), below 1 is <b>inelastic</b> (they hardly react).</li><li>Elastic: raising the price lowers revenue. Inelastic: raising the price raises revenue.</li></ul>',
+ e:'<ul><li>Price up 10%, quantity down 20%: elasticity = −20% ÷ 10% = −2 (elastic). Revenue: 1.10 × 0.80 = 0.88, so revenue falls 12%.</li><li>Price up 10%, quantity down 5%: elasticity = −0.5 (inelastic). Revenue: 1.10 × 0.95 = 1.045, so revenue rises 4.5%.</li></ul>',
+ p:[['Price falls 10% and quantity rises 15%. Elasticity, and is it elastic?','+15% ÷ −10% = −1.5. Above 1 in size, so elastic.'],['Elasticity is 0.5. Should you raise the price?','Yes, demand is inelastic: quantity falls less than price rises, so revenue goes up.']]}
+],
+cards:{"Formulas":[
+["Gross profit","Revenue − COGS. Gross margin = gross profit ÷ revenue."],
+["Operating profit","Gross profit − operating expenses (rent, salaries, marketing)."],
+["Contribution margin","Price − variable cost per unit. Ratio = contribution margin ÷ price."],
+["Breakeven units","Fixed costs ÷ contribution margin per unit."],
+["Market share","Your sales ÷ total market sales. $30M of $200M = 15%."],
+["Relative market share","Your share ÷ largest competitor's share. 15% ÷ 30% = 0.5."],
+["CAGR","(End ÷ start)^(1/years) − 1. $100M to $144M in 2 years = 20%."],
+["Rule of 72","Years to double = 72 ÷ growth rate in %. At 9%: 8 years."],
+["ROI","(Gain − cost) ÷ cost. Invest $100M, sell $130M = 30%."],
+["Perpetuity","Payment per year ÷ discount rate. $5M at 10% = $50M."],
+["Growing perpetuity","Next year's payment ÷ (discount rate − growth). $5M ÷ (10% − 2%) = $62.5M."],
+["Price elasticity","% change in quantity ÷ % change in price. −20% ÷ 10% = −2, elastic."]]}});
+(function(){var a=SECTIONS.pop(),i,p=SECTIONS.length;for(i=0;i<SECTIONS.length;i++){if(SECTIONS[i].id==='tricks'){p=i+1;}}SECTIONS.splice(p,0,a);})();
 })();
 (function(){
 var pl=null,st=null,i;
