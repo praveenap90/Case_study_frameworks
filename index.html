@@ -1665,6 +1665,41 @@ subs:[
 (function(){var a=SECTIONS.pop(),i,p=SECTIONS.length;for(i=0;i<SECTIONS.length;i++){if(SECTIONS[i].id==='coffee'){p=i+1;}}SECTIONS.splice(p,0,a);})();
 })();
 (function(){
+function fo(id,px,pb,bus,cxs,top){var s='',i;for(i=0;i<cxs.length;i++){s+=P(id,'M'+px+' '+pb+' L'+px+' '+bus+' L'+cxs[i]+' '+bus+' L'+cxs[i]+' '+(top-2));}return s;}
+function fi(id,cxs,bot,bus,tx,top){var s='',i;for(i=0;i<cxs.length;i++){s+=P(id,'M'+cxs[i]+' '+bot+' L'+cxs[i]+' '+bus+' L'+tx+' '+bus+' L'+tx+' '+(top-2));}return s;}
+DIAGRAMS.merchant={title:'Merchant adoption: find the leak in the funnel',svg:function(){
+  var id='merchant',b='',i,x,st=[['Target market','1,000,000','blue'],['Reached','200,000','teal'],['Sign up','20,000','purple'],['Integrated','10,000','coral'],['Active','8,000','amber']],cv=['× 20%','× 10%','× 50%','× 80%'],lv=[['Easy integration','plugins, SDK, docs','teal'],['Faster onboarding','quicker checks','blue'],['Partnerships','platforms, banks, POS','purple'],['Targeted discounts','fees waived early on','pink']];
+  b+=Q('gray',200,8,280,34,'Case prompt: grow merchant adoption')+P(id,'M340 42 L340 56');
+  b+=Q('purple',160,58,360,34,'Clarify: define "active", target, current funnel')+P(id,'M340 92 L340 112');
+  for(i=0;i<5;i++){x=21+130*i;b+=B(st[i][2],x,114,118,56,st[i][0],st[i][1]);if(i<4){b+=P(id,'M'+(x+118)+' 142 L'+(x+130)+' 142')+T('ts',x+124,184,cv[i]);}}
+  b+=P(id,'M470 170 L470 204 L340 204 L340 228');
+  b+=Q('coral',170,230,340,34,'Biggest leak: only 50% finish integration');
+  b+=fo(id,340,264,278,[97,259,421,583],292);
+  for(i=0;i<4;i++){b+=B(lv[i][2],22+162*i,294,150,48,lv[i][0],lv[i][1]);}
+  b+=fi(id,[97,259,421,583],342,356,340,372);
+  b+=B('amber',120,374,440,52,'Fix integration: 50% → 65%','10,400 active (+2,400), about +$4.8M a year')+P(id,'M340 426 L340 442');
+  b+=Q('teal',130,444,420,34,'Recommend: fix integration first, then partnerships')+P(id,'M340 478 L340 494');
+  b+=Q('gray',120,496,440,34,'Risks: fraud and compliance, margin loss, partner conflict');
+  return SV(id,680,540,'Merchant adoption flowchart','Clarify the goal, then map the funnel: a target market of 1,000,000 merchants, 200,000 reached, 20,000 sign up, 10,000 integrate and 8,000 become active. The biggest leak is integration, where only 50 percent finish. Levers are easy integration, faster onboarding, partnerships and targeted discounts. Raising integration from 50 to 65 percent gives 10,400 active merchants, about 4.8 million dollars more a year.',b);
+}};
+SECTIONS.push({id:'merchant',group:'4. Practice and review',title:'Practice case: Merchant adoption',desc:'Payment gateway, funnel and drop-off. Numbers are made up',
+concept:'',example:'',practice:[],pics:[],cards:null,
+subs:[
+{t:'The scenario',d:'A payments company wants more merchants on its gateway',
+ c:'<p>A payments company wants more merchants to adopt its payment gateway. How would you approach this?</p><p>All numbers below are made-up placeholders. State them out loud as assumptions.</p>',e:'',p:[]},
+{t:'The answer, step by step (CLEAR)',d:'Clarify, Lay out, Evaluate, Assess, Recommend',
+ c:'<ul><li><b>C: Clarify.</b> What does "adoption" mean: signed up, integrated, or actually processing? (Push for "active": at least one transaction in 30 days.) What is the target and timeframe? Which merchants: small, mid-size or large, online or in-store? What is the current funnel, pricing, and who are the competitors?</li><li><b>L: Lay out.</b> Treat adoption as a funnel and find where merchants drop off: awareness, interest, sign-up, integration, first transaction, ongoing use. Cross-check with the 3Cs: customers (what merchants need), competitors (what they offer), company (our product, price, trust).</li><li><b>E: Evaluate.</b> Put numbers on each step and find the biggest leak (see the flowchart and numbers below).</li><li><b>A: Assess.</b> List the levers against the barriers, and rank them by impact and effort.</li><li><b>R: Recommend.</b> Fix integration and onboarding first, add partnerships next, and use temporary fee discounts only for targeted segments. Risks: fraud and compliance, lower margin from discounts, partners favoring a competitor. Next step: measure drop-off at each step to confirm where merchants leave.</li></ul>',e:'',p:[]},
+{t:'Funnel flowchart',d:'From the target market to active merchants, and the biggest leak',
+ c:'<p>Follow the merchants down the funnel. The step with the biggest drop is where to act first.</p>{{pic:merchant}}',e:'',p:[]},
+{t:'Key numbers and levers',d:'The funnel math, the payback, and which lever fits which barrier',
+ c:tbl(['Step','Merchants'],[['Target market','1,000,000'],['Reached (20%)','200,000'],['Sign up (10%)','20,000'],['Finish integration (50%)','10,000'],['Start processing (80%)','8,000 active']])+
+ '<ul><li>Raise integration from 50% to 65%: 20,000 × 65% × 80% = 10,400 active, which is 2,400 more (+30%).</li><li>At $2K of fees per merchant a year: 2,400 × $2K = $4.8M extra a year.</li><li>If the fix costs $1.2M, payback = 1.2 ÷ 4.8 = 0.25 years, about 3 months.</li></ul>'+
+ tbl(['Barrier','Lever','Impact / effort'],[['Hard to integrate','Plugins, simple SDK, better docs','High / medium'],['Slow onboarding and checks','Faster verification','High / medium'],['Price','Waive fees for the first months','Medium / low, but cuts margin'],['Awareness and trust','Partnerships with e-commerce platforms, banks, POS providers','High / medium'],['Missing features','More payment methods, fraud tools','Medium / high']]),e:'',
+ p:[['Integration rises from 50% to 60%. How many active merchants?','20,000 × 60% × 80% = 9,600.'],['2,400 more merchants at $2K a year each. Extra revenue?','2,400 × $2K = $4.8M a year.'],['The fix costs $1.2M and adds $4.8M a year. Payback?','1.2 ÷ 4.8 = 0.25 years, about 3 months.']]}
+]});
+(function(){var a=SECTIONS.pop(),i,p=SECTIONS.length;for(i=0;i<SECTIONS.length;i++){if(SECTIONS[i].id==='giantbus'){p=i+1;}}SECTIONS.splice(p,0,a);})();
+})();
+(function(){
 var pl=null,st=null,i;
 for(i=0;i<SECTIONS.length;i++){if(SECTIONS[i].id==='plan'){pl=SECTIONS[i];}if(SECTIONS[i].id==='study'){st=SECTIONS[i];}}
 pl.group='5. Study plan';pl.title='6-week roadmap';pl.desc='What to learn each week, from math basics to mock interviews';
