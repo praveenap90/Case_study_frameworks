@@ -69,6 +69,13 @@ button:disabled{opacity:.4;cursor:default}
 .cs tr:nth-child(8n+7){--cl:#639922;--cb:rgba(99,153,34,.2)}
 .cs tr:nth-child(8n+8){--cl:#888780;--cb:rgba(136,135,128,.2)}
 .toc[hidden]{display:none!important}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin:0 0 14px}
+.topbar h1{margin:0}
+.themeseg{display:inline-flex;border:1px solid var(--bd,var(--line));border-radius:999px;overflow:hidden;background:var(--card)}
+.themeseg button{border:0;background:transparent;color:var(--text);font:inherit;font-size:14px;font-weight:500;padding:8px 16px;cursor:pointer}
+.themeseg button+button{border-left:1px solid var(--bd,var(--line))}
+.themeseg button:hover{background:var(--accbg)}
+.themeseg button[aria-pressed=true]{background:var(--acc);color:#fff}
 /* modules */
 .mod{margin:0 0 22px;border:1px solid var(--bd,var(--line));border-left:6px solid var(--acc);border-radius:16px;background:var(--soft);box-shadow:var(--sh,none)}
 .mod>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px clamp(14px,2.5vw,24px)}
@@ -232,13 +239,10 @@ button:active{transform:translateY(1px)}
 </head>
 <body>
 <div class="wrap">
-<h1>Case interview numbers and frameworks</h1>
+<div class="topbar"><h1>Case interview numbers and frameworks</h1><div class="themeseg" id="themeSeg" role="group" aria-label="Colour theme"><button type="button" data-th="light">&#9728; Light</button><button type="button" data-th="dark">&#9790; Dark</button></div></div>
 <div class="intro"><h3>What this page is about</h3>
 <p>A case interview gives you a business problem and asks you to think out loud and do quick math. It is common for data analyst and data engineer roles. A framework is just a simple structure for organizing your thinking, so you do not freeze or miss something important.</p>
 <p>This page is a study kit in five modules: pick the approach, know the question types, sharpen your math, practice sample cases, then follow a study plan. Every section follows the same order: the idea, a worked example, practice questions, pictures and flash cards.</p></div>
-<div class="how"><b>How to use this page</b>
-<ol><li>Open one section. Read the concept and the worked example.</li><li>Try the practice questions before you tap the answer.</li><li>Tap a flash card to flip it. Say the answer out loud first.</li><li>Tap any highlighted term, like BCG matrix or Payback, to see what it means. Mark a section as done when you finish it.</li></ol></div>
-<div class="bar"><button type="button" id="openAll">Open all sections</button><button type="button" id="closeAll">Close all sections</button><button type="button" id="themeBtn" aria-label="Change colour theme">Theme: Auto</button></div>
 <div class="prog"><span id="progTxt"></span><div class="pbar"><i id="pfill"></i></div></div>
 <nav class="gnav" id="gnav" aria-label="Jump to a group"></nav>
 <div class="toc" id="toc" hidden></div>
@@ -1910,22 +1914,11 @@ document.addEventListener('click',function(e){
   }
 });
 
-document.getElementById('openAll').addEventListener('click',function(){
-  var d=document.querySelectorAll('details.sec,details.sub'),i;for(i=0;i<d.length;i++){d[i].open=true;}
-});
-document.getElementById('closeAll').addEventListener('click',function(){
-  var d=document.querySelectorAll('details.sec,details.sub'),i;for(i=0;i<d.length;i++){d[i].open=false;}
-});
 window.addEventListener('hashchange',openFromHash);
-var tb=document.getElementById('themeBtn'),TH=['auto','light','dark'];
-function curTheme(){var t=document.documentElement.getAttribute('data-theme');return (t==='light'||t==='dark')?t:'auto';}
-function showTheme(){var t=curTheme();tb.textContent='Theme: '+t.charAt(0).toUpperCase()+t.slice(1);}
-tb.addEventListener('click',function(){
-  var n=TH[(TH.indexOf(curTheme())+1)%3];
-  if(n==='auto'){document.documentElement.removeAttribute('data-theme');}else{document.documentElement.setAttribute('data-theme',n);}
-  try{if(n==='auto'){localStorage.removeItem('cp-theme');}else{localStorage.setItem('cp-theme',n);}}catch(err){}
-  showTheme();
-});
+var tsg=document.getElementById('themeSeg');
+function effTheme(){var t=document.documentElement.getAttribute('data-theme');if(t==='light'||t==='dark'){return t;}return (window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}
+function showTheme(){var t=effTheme(),bs=tsg.querySelectorAll('button'),k;for(k=0;k<bs.length;k++){bs[k].setAttribute('aria-pressed',bs[k].getAttribute('data-th')===t?'true':'false');}}
+tsg.addEventListener('click',function(ev){var b=ev.target.closest?ev.target.closest('button[data-th]'):null;if(!b){return;}var n=b.getAttribute('data-th');document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('cp-theme',n);}catch(err){}showTheme();});
 showTheme();
 
 
